@@ -16,7 +16,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_28" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -25,7 +24,11 @@
     </system>
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
+    <leaf />
+=======
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+>>>>>>> c51455fbc9c1a62780f55c0c1b70bdc4108bae6f
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -90,9 +93,16 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
+<<<<<<< HEAD
+    <option name="x" value="993" />
+    <option name="y" value="25" />
+    <option name="width" value="927" />
+    <option name="height" value="1055" />
+=======
     <option name="x" value="12" />
     <option name="width" value="1061" />
     <option name="height" value="1037" />
+>>>>>>> c51455fbc9c1a62780f55c0c1b70bdc4108bae6f
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -100,6 +110,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+      <pane id="AndroidView" />
+=======
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -129,8 +142,10 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+>>>>>>> c51455fbc9c1a62780f55c0c1b70bdc4108bae6f
       <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -227,11 +242,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
+    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="1" />
+<<<<<<< HEAD
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.21970116" />
+=======
       <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.32977587" />
+>>>>>>> c51455fbc9c1a62780f55c0c1b70bdc4108bae6f
       <window_info id="Structure" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
@@ -244,7 +263,11 @@
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="5" />
+<<<<<<< HEAD
+      <window_info anchor="bottom" id="Build" order="6" visible="true" weight="0.32937366" />
+=======
       <window_info active="true" anchor="bottom" id="Build" order="6" sideWeight="0.4994664" visible="true" weight="0.32969433" />
+>>>>>>> c51455fbc9c1a62780f55c0c1b70bdc4108bae6f
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
