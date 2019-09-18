@@ -30,8 +30,6 @@ public class EinkaufsListe extends AppCompatActivity {
         //FragmentTransaction transaction = getFragmentManager().beginTransaction();
         //transaction.replace(R.id.container, fragment, "MainFragment");
 
-
-        addItem = findViewById(R.id.eddittext_item);
         add = findViewById(R.id.button_add);
 
         add.setOnClickListener(new View.OnClickListener() {
