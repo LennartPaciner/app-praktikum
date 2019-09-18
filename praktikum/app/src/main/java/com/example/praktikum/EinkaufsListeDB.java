@@ -1,10 +1,13 @@
 package com.example.praktikum;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.example.praktikum.DBHelper.*;
+
+import org.json.JSONArray;
 
 import java.math.BigInteger;
 import java.sql.Date;
@@ -45,4 +48,15 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
         onCreate(db);
 
     }
+
+    public Cursor getAllData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * from " + GroceryEntry.TABLE_NAME1,null);
+    }
+
+    public Cursor getNameData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT Name from " + GroceryEntry.TABLE_NAME1,null);
+    }
+
 }

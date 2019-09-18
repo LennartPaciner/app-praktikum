@@ -19,8 +19,13 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class EinkaufsListe extends AppCompatActivity {
 
+    private EditText addItem;
     private int amount = 1;
     private SQLiteDatabase database;
     private Button add;
@@ -43,9 +48,7 @@ public class EinkaufsListe extends AppCompatActivity {
         EinkaufsListeDB einkaufsListe = new EinkaufsListeDB(this);
         database = einkaufsListe.getWritableDatabase();
 
-        //MainFragment fragment = new MainFragment();
-        //FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        //transaction.replace(R.id.container, fragment, "MainFragment");
+        getProductAll(einkaufsListe.getAllData());
     }
 
     public void increase(){
@@ -63,6 +66,7 @@ public class EinkaufsListe extends AppCompatActivity {
         cv.put(DBHelper.GroceryEntry.COLUMN_MHD, mhd);
         cv.put(DBHelper.GroceryEntry.COLUMN_RESTOCK, restock);
         database.insert(DBHelper.GroceryEntry.TABLE_NAME1, null, cv);
+
     }
 
     public void removeItemDB(long id){
@@ -78,7 +82,33 @@ public class EinkaufsListe extends AppCompatActivity {
         //updateItemDB(4, con);
     }
 
-    public void showDialogBox(String text){
+    public JSONArray getProductAll(Cursor result) {
+        JSONArray resultSet = new JSONArray();
+        StringBuffer buffer = new StringBuffer();
+        if (result != null && result.getCount() > 0) {
+            while (result.moveToNext()) {
+                try {
+                    JSONObject object = new JSONObject();
+                    object.put("id", result.getInt(0));
+                    object.put("barcode", result.getInt(1));
+                    object.put("name", result.getString(2));
+                    object.put("menge", result.getInt(3));
+                    object.put("mhd", result.getString(4));
+                    object.put("restock", result.getInt(5));
+                    resultSet.put(object);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+	Toast.makeText(this, resultSet.toString(), Toast.LENGTH_LONG).show();
+        return resultSet;
+        }
+        Toast.makeText(this, resultSet.toString(), Toast.LENGTH_LONG).show();
+        return resultSet;
+    }
+
+public void showDialogBox(String text){
         // Creating alert Dialog with one Button
         final EditText edittext = new EditText(getApplicationContext());
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(EinkaufsListe.this);
@@ -116,6 +146,7 @@ public class EinkaufsListe extends AppCompatActivity {
         mCursor.close();
         return false;
     }
+
 
 
 }
