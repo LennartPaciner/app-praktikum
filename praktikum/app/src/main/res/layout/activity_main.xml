@@ -6,13 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right">
+
+            <ToggleButton
+                android:id="@+id/toggleButton3"
+                android:layout_width="66dp"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="ToggleButton"
+                android:textOff="EN"
+                android:textOn="DE" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingTop="100dp">
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@mipmap/checklist_blau"
+                android:visibility="visible" />
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@mipmap/counter_rot" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingTop="80dp">
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@mipmap/chef_gelb" />
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@mipmap/recipe_book_gruen" />
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@mipmap/nut_icon"
+        android:minWidth="0dip"
+        android:minHeight="0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
