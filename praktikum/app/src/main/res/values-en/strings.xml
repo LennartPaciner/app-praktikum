@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WhatsThere</string>
-    <string name="stock_name">Stock</string>
-    <string name="grocery_list">Grocery List</string>
+    <string name="grocery_list">Product</string>
+<string name="product_name">Product</string>
+    <string name="amount">Amount</string>
+    <string name="best_before_date">BBD</string>
+    <string name="restock">Restock</string>
+    <string name="your_stock">Your Stock</string>
+    <string name="insert_product_name">Insert product name:</string>
 </resources>
