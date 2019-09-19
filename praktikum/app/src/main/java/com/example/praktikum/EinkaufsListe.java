@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,6 +29,9 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import org.w3c.dom.Text;
 
 public class EinkaufsListe extends AppCompatActivity {
@@ -37,8 +42,8 @@ public class EinkaufsListe extends AppCompatActivity {
     private Button add;
     private static final String TAG = "Einkaufsliste";
     public Button addProduct;
+    private static DecimalFormat df2 = new DecimalFormat("#.###");
     public EinkaufsListeDB einkaufsListe;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +113,7 @@ public class EinkaufsListe extends AppCompatActivity {
 
     }
 
-    public void addItemEinkaufsliste(@Nullable Long barcode, String name, @Nullable Integer amount, @Nullable String mhd, @Nullable Integer restock){
+    public void addItemEinkaufsliste(@Nullable Long barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock){
 
         ContentValues cv = new ContentValues();
         //cv.put(DBHelper.GroceryEntry.COLUMN_ID,1);
@@ -144,7 +149,7 @@ public class EinkaufsListe extends AppCompatActivity {
                     object.put("id", result.getInt(0));
                     object.put("barcode", result.getInt(1));
                     object.put("name", result.getString(2));
-                    object.put("menge", result.getInt(3));
+                    object.put("menge", result.getString(3));
                     object.put("mhd", result.getString(4));
                     object.put("restock", result.getInt(5));
                     resultSet.put(object);
@@ -160,33 +165,39 @@ public class EinkaufsListe extends AppCompatActivity {
         return resultSet;
     }
 
-public void showDialogBox(String text){
-        // Creating alert Dialog with one Button
-        final EditText edittext = new EditText(getApplicationContext());
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(EinkaufsListe.this);
-        edittext.setGravity(Gravity.CENTER);
-        alertDialog.setView(edittext);
-        //AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+    public void showDialogBox(String text){
 
-        // Setting Dialog Title
-        alertDialog.setTitle("Add Product");
+        LayoutInflater factory = LayoutInflater.from(this);
+        final View textEntryView = factory.inflate(R.layout.text_entry, null);
 
-        // Setting Dialog Message
-        alertDialog.setMessage(text);
+        final EditText input1 =  textEntryView.findViewById(R.id.edit1);
+        final EditText input2 =  textEntryView.findViewById(R.id.edit2);
 
-        // Setting Positive "Yes" Button
-        alertDialog.setNeutralButton("ADD",
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Produktname und Menge:").setView(textEntryView).setPositiveButton("Save",
                 new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int which) {
-                        // Write your code here to execute after dialog
-                        String product = edittext.getText().toString();
-                        if(!checkNameInEinkaufsListe(product)){
-                            addItemEinkaufsliste(null, product, null, null, null);
-                            createEinkaufsliste();
+                    public void onClick(DialogInterface dialog,
+                                        int whichButton) {
+                        if(!checkNameInEinkaufsListe(input1.toString())){
+                            float input = Float.parseFloat(input2.getText().toString());
+                            String amount = df2.format(input);
+                            addItemEinkaufsliste(null, input1.getText().toString(),amount , null, null);
                         }
                     }
+                }).setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int whichButton) {
+                        return;
+                    }
                 });
-        alertDialog.show();
+        alert.show();
+    }
+
+    public static float round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
     }
 
     public boolean checkNameInEinkaufsListe(String Name){

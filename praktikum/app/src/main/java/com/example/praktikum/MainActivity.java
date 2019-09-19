@@ -17,6 +17,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private Button einkaufButton;
     private Button stockButton;
+    private Button cookingButton;
     private ToggleButton languageButton;
     private String appLanguage;
 
@@ -47,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
                 openStockActivity();
             }
         });
+
+        cookingButton = findViewById(R.id.buttonCooking);
+        cookingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCookingView();
+            }
+        });
     }
 
     public void openEinkaufsListe(){
@@ -62,6 +71,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, StockActivity.class);
         startActivity(intent);
     }
+
+
+    public void openCookingView(){
+        setAppLanguage(appLanguage);
+        Intent intent = new Intent(this, CookingView.class);
+        startActivity(intent);
+    }
+
 
     private void setAppLanguage(String language) {
         Resources res = getResources();

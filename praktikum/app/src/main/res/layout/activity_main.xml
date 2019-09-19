@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="10dp"
     android:background="#D2FAFB"
     tools:context=".MainActivity">
 
@@ -25,62 +21,63 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
 
-    <Button
-        android:id="@+id/buttonCheckList"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/shopping_basket"
-        android:visibility="visible"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/toggleLanguage"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="50dp"
-        />
-
-    <Space
-        android:layout_width="50dp"
-        android:layout_height="wrap_content" />
-
-    <Button
-
-        android:id="@+id/buttonStock"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/fridge"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/toggleLanguage"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="50dp"
-        />
-
-
-
-
-    <Button
-        android:id="@+id/buttonCooking"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/chef"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/buttonCheckList"
-        />
+            <Button
+                android:id="@+id/buttonCheckList"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/shopping_basket"
+                android:visibility="visible" />
 
             <Space
                 android:layout_width="50dp"
                 android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/buttonRecipe"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/recipe_book"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/buttonStock"
-        />
+            <Button
+                android:id="@+id/buttonStock"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/fridge" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingTop="100dp">
+
+            <Button
+                android:id="@+id/buttonCooking"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/chef" />
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/buttonRecipe"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/recipe_book" />
+        </TableRow>
+
+    </TableLayout>
 
     <Button
         android:id="@+id/buttonSettings"
@@ -92,10 +89,20 @@
         android:background="@drawable/nut_icon"
         android:minWidth="0dip"
         android:minHeight="0dip"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="364dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:fontFamily="serif"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-
+</androidx.constraintlayout.widget.ConstraintLayout>
