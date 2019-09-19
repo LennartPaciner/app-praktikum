@@ -1,90 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
     tools:context=".MainActivity">
 
-    <TableLayout
-        android:layout_width="0dp"
+
+    <ToggleButton
+        android:id="@+id/toggleButton3"
+        android:layout_width="66dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_alignParentRight="true"
+        android:checked="true"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:text="ToggleButton"
+        android:textOff="EN"
+        android:textOn="DE" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="right">
 
-            <ToggleButton
-                android:id="@+id/toggleButton3"
-                android:layout_width="66dp"
-                android:layout_height="match_parent"
-                android:checked="true"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:text="ToggleButton"
-                android:textOff="EN"
-                android:textOn="DE" />
 
-        </TableRow>
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@mipmap/checklist_blau"
+        android:visibility="visible"
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/toggleButton3"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingTop="100dp">
+    <Space
+        android:layout_width="50dp"
+        android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@mipmap/checklist_blau"
-                android:visibility="visible" />
+    <Button
 
-            <Space
-                android:layout_width="50dp"
-                android:layout_height="wrap_content" />
+        android:id="@+id/button"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@mipmap/counter_rot"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/toggleButton3"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@mipmap/counter_rot" />
-        </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingTop="80dp">
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@mipmap/chef_gelb" />
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@mipmap/chef_gelb"
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button2"
+        />
 
-            <Space
-                android:layout_width="50dp"
-                android:layout_height="wrap_content" />
+    <Space
+        android:layout_width="50dp"
+        android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@mipmap/recipe_book_gruen" />
-        </TableRow>
-
-    </TableLayout>
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@mipmap/recipe_book_gruen"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button"
+        />
 
     <Button
         android:id="@+id/button5"
@@ -96,6 +89,10 @@
         android:background="@mipmap/nut_icon"
         android:minWidth="0dip"
         android:minHeight="0dip"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
+
+
+
