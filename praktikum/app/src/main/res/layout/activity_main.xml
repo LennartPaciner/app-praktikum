@@ -80,13 +80,13 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/buttonSettings"
+        android:id="@+id/buttonInformation"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/nut_icon"
+        android:background="@drawable/information"
         android:minWidth="0dip"
         android:minHeight="0dip"
         app:layout_constraintBottom_toBottomOf="parent"
