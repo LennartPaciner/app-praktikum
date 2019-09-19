@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">WhatsThere</string>
     <string name="stock_name">Vorrat</string>
+    <string name="grocery_list">Einkaufsliste</string>
 </resources>

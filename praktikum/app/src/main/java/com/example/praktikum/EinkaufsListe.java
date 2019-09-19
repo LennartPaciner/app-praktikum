@@ -11,17 +11,23 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 public class EinkaufsListe extends AppCompatActivity {
 
@@ -31,6 +37,7 @@ public class EinkaufsListe extends AppCompatActivity {
     private Button add;
     private static final String TAG = "Einkaufsliste";
     public Button addProduct;
+    public EinkaufsListeDB einkaufsListe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +52,59 @@ public class EinkaufsListe extends AppCompatActivity {
             }
         });
 
-        EinkaufsListeDB einkaufsListe = new EinkaufsListeDB(this);
+        einkaufsListe = new EinkaufsListeDB(this);
         database = einkaufsListe.getWritableDatabase();
 
-        getProductAll(einkaufsListe.getAllData());
+        createEinkaufsliste();
+
     }
 
     public void increase(){
         amount++;
+
+    }
+
+    public void createEinkaufsliste(){
+        JSONArray arr = getProductAll(einkaufsListe.getAllData());
+        for(int i = 0; i < arr.length(); i++){
+            try{
+                JSONObject object = arr.getJSONObject(i);
+                String name = object.getString("name");
+                //int amount = object.getInt("amount");
+                TableLayout tableLayout = findViewById(R.id.tableLayout1);
+                TableRow rowLayout = findViewById(R.id.rowLayout);
+                TextView columnLayout = findViewById(R.id.columnLayout);
+
+                TableRow neu = new TableRow(this);
+
+                TextView nameTV = new TextView(this);
+                nameTV.setLayoutParams(columnLayout.getLayoutParams());
+                TextView amountTV = new TextView(this);
+                amountTV.setLayoutParams(columnLayout.getLayoutParams());
+                CheckBox checkBox = new CheckBox(this);
+                checkBox.setLayoutParams(columnLayout.getLayoutParams());
+                Button qr = new Button(this);
+                qr.setLayoutParams(columnLayout.getLayoutParams());
+
+
+                nameTV.setText(name);
+                amountTV.setText("1");
+
+                checkBox.setText("");
+                qr.setText("btn2");
+
+                neu.addView(nameTV);
+                neu.addView(amountTV);
+                neu.addView(checkBox);
+                neu.addView(qr);
+
+                tableLayout.addView(neu);
+
+            }catch (JSONException e){
+                Log.e("Einkaufsliste", e.getMessage());
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -130,6 +182,7 @@ public void showDialogBox(String text){
                         String product = edittext.getText().toString();
                         if(!checkNameInEinkaufsListe(product)){
                             addItemEinkaufsliste(null, product, null, null, null);
+                            createEinkaufsliste();
                         }
                     }
                 });
