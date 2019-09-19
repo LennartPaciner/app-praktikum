@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Praktikum-App</string>
+    <string name="app_name">WhatsThere</string>
+    <string name="stock_name">Vorrat</string>
 </resources>
