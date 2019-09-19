@@ -11,9 +11,10 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/your_stock"
+        android:text="@string/my_stock"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:fontFamily="serif"
+        android:textSize="24sp"
+        app:fontFamily="sans-serif-black"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,15 +110,15 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/buttonAddStock"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:id="@+id/buttonAddGrocery"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/add"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:background="@drawable/add_1"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/divider"
@@ -185,12 +186,12 @@
 
     <Button
         android:id="@+id/buttonHome"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/home"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

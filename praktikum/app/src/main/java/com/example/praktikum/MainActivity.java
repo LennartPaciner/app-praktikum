@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button cookingButton;
     private ToggleButton languageButton;
     private String appLanguage;
+    private Button infoButton;
 
 
     @Override
@@ -31,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         createLanguageButton();
+
+        infoButton = findViewById(R.id.buttonInformation);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openInfoView();
+            }
+        });
 
 
         einkaufButton = findViewById(R.id.buttonCheckList);
@@ -69,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
    //     System.out.println("Locale.getDefault().getLanguage():     "+Locale.getDefault().getLanguage());
    //     System.out.println("getResources().getConfiguration().locale:     "+getResources().getConfiguration().locale);
         Intent intent = new Intent(this, StockActivity.class);
+        startActivity(intent);
+    }
+
+    public void openInfoView(){
+        setAppLanguage(appLanguage);
+        Intent intent = new Intent(this, InformationView.class);
         startActivity(intent);
     }
 

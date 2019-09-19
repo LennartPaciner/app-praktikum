@@ -45,23 +45,44 @@ public class EinkaufsListe extends AppCompatActivity {
     public Button addProduct;
     private static DecimalFormat df2 = new DecimalFormat("#.###");
     public EinkaufsListeDB einkaufsListe;
+    private Button homeButton;
+    private Button stockButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_einkaufs_liste);
 
-        addProduct = findViewById(R.id.button_add);
+        addProduct = findViewById(R.id.buttonAddGrocery);
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 showDialogBox("Produknamen eingeben:");
             }
         });
 
         einkaufsListe = new EinkaufsListeDB(this);
         database = einkaufsListe.getWritableDatabase();
+
+        stockButton = findViewById(R.id.buttonStock);
+        stockButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openStockActivity();
+            }
+        });
+
+
+
+        homeButton = findViewById(R.id.buttonHome);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMainPage();
+            }
+        });
+
 
         createEinkaufsliste();
 
@@ -214,6 +235,16 @@ public class EinkaufsListe extends AppCompatActivity {
         return false;
     }
 
+
+    public void openMainPage(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void openStockActivity(){
+        Intent intent = new Intent(this, StockActivity.class);
+        startActivity(intent);
+    }
 
 
 }

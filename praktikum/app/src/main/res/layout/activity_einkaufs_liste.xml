@@ -4,29 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D2FAFB"
     tools:context=".EinkaufsListe">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:text="@string/grocery_list"
+        android:layout_height="wrap_content"
+        android:text="@string/my_grocery_list"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:fontFamily="serif"
+        android:textSize="24sp"
+        app:fontFamily="sans-serif-black"
         app:layout_constraintBottom_toTopOf="@+id/SView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_add"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <View
         android:id="@+id/divider"
@@ -51,48 +43,94 @@
         <TableLayout
             android:id="@+id/tableLayout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp">
+            android:layout_height="wrap_content">
 
             <TableRow
                 android:id="@+id/rowLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/columnLayout"
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:text="Name" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="amount" />
+                    <FrameLayout
+                        android:id="@+id/frameLayoutProduct"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="15dp"
-                    android:text="check" />
+                        <TextView
+                            android:id="@+id/columnLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="@string/product_name"
+                            app:fontFamily="serif" />
+                    </FrameLayout>
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="60dp"
-                    android:layout_weight="1"
-                    android:text="QR" />
+                    <FrameLayout
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="@string/amount"
+                            app:fontFamily="serif" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="@string/best_before_date"
+                            app:fontFamily="serif" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="@string/restock"
+                            app:fontFamily="serif" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
             </TableRow>
 
         </TableLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/buttonAddGrocery"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/add_1"
+        app:layout_constraintBottom_toTopOf="@+id/SView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -110,12 +148,12 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/buttonCheckList"
+                android:id="@+id/buttonStock"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/shopping_basket" />
+                android:background="@drawable/fridge" />
         </FrameLayout>
 
         <FrameLayout
@@ -150,12 +188,12 @@
 
     <Button
         android:id="@+id/buttonHome"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/home"
+        app:layout_constraintBottom_toTopOf="@+id/SView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
