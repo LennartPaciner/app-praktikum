@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WhatsThere</string>
-    <string name="product_name">Produkt</string>
+    <string name="grocery_list">Einkaufsliste</string>
+ <string name="product_name">Produkt</string>
     <string name="amount">Menge</string>
     <string name="best_before_date">MHD</string>
     <string name="restock">Auffüllen</string>

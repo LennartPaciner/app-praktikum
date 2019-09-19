@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WhatsThere</string>
-    <string name="product_name">Product</string>
+    <string name="grocery_list">Product</string>
+<string name="product_name">Product</string>
     <string name="amount">Amount</string>
     <string name="best_before_date">BBD</string>
     <string name="restock">Restock</string>
