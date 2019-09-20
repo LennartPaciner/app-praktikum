@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WhatsThere</string>
+    <string name="product_name">Product</string>
+    <string name="amount">Amount</string>
+    <string name="best_before_date">BBD</string>
+    <string name="restock">Restock</string>
+    <string name="insert_product_name">Insert product name:</string>
+    <string name="my_grocery_list">My Grocery List</string>
+    <string name="my_stock">My Stock</string>
+    <string name="information_text">We hope you are happy with:</string>
+    <string name="developer_team">Your Developer-Team:</string>
+</resources>

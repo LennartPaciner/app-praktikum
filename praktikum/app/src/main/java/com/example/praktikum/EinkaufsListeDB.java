@@ -15,7 +15,7 @@ import java.sql.Date;
 import static java.sql.Types.BIT;
 
 public class EinkaufsListeDB extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "DB24.db";
+    public static final String DATABASE_NAME = "DB25.db";
     public static final int DATABASE_VERSION = 1;
 
     public EinkaufsListeDB(Context context) {
@@ -27,14 +27,14 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
         final String SQL_CREATE_EINKAUFSLISTE_TABLE = "CREATE TABLE " + GroceryEntry.TABLE_NAME1 + " (" +
                 GroceryEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ GroceryEntry.COLUMN_BARCODE +
                 " INTEGER, "  +GroceryEntry.COLUMN_NAME + " TEXT NOT NULL, "  +
-                GroceryEntry.COLUMN_AMOUNT + " INTEGER, " + GroceryEntry.COLUMN_MHD + " TEXT, " +
+                GroceryEntry.COLUMN_AMOUNT + " TEXT, " + GroceryEntry.COLUMN_MHD + " TEXT, " +
                 GroceryEntry.COLUMN_RESTOCK + " INTEGER);";
         db.execSQL(SQL_CREATE_EINKAUFSLISTE_TABLE);
 
         final String SQL_CREATE_VORRAT_TABLE = "CREATE TABLE " + GroceryEntry.TABLE_NAME2 + " (" + GroceryEntry.COLUMN_ID +
                 " INTEGER PRIMARY KEY AUTOINCREMENT, " + GroceryEntry.COLUMN_BARCODE +
                 " INTEGER NOT NULL, "  +GroceryEntry.COLUMN_NAME + " TEXT NOT NULL, "  +
-                GroceryEntry.COLUMN_AMOUNT + " INTEGER NOT NULL, " + GroceryEntry.COLUMN_MHD + " TEXT NOT NULL, " +
+                GroceryEntry.COLUMN_AMOUNT + " TEXT NOT NULL, " + GroceryEntry.COLUMN_MHD + " TEXT NOT NULL, " +
                 GroceryEntry.COLUMN_RESTOCK + " INTEGER NOT NULL);";
         db.execSQL(SQL_CREATE_VORRAT_TABLE);
 
