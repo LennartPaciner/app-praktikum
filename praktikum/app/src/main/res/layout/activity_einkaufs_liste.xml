@@ -68,7 +68,10 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/product_name"
-                            app:fontFamily="serif" />
+                            android:textColor="#000000"
+                            app:fontFamily="serif"
+                            tools:layout_editor_absoluteX="-125dp"
+                            tools:layout_editor_absoluteY="25dp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -82,7 +85,10 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/amount"
-                            app:fontFamily="serif" />
+                            android:textColor="#000000"
+                            app:fontFamily="serif"
+                            tools:layout_editor_absoluteX="-20dp"
+                            tools:layout_editor_absoluteY="25dp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -96,7 +102,10 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/best_before_date"
-                            app:fontFamily="serif" />
+                            android:textColor="#000000"
+                            app:fontFamily="serif"
+                            tools:layout_editor_absoluteX="85dp"
+                            tools:layout_editor_absoluteY="25dp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -110,6 +119,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/restock"
+                            android:textColor="#000000"
                             app:fontFamily="serif" />
                     </FrameLayout>
 

@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -34,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         appLanguage = getResources().getConfiguration().locale.toString();     // returns active language code
 
-
-        createLanguageButton();
+        createLanguageButton();    // create Language Toggle Button
 
         infoButton = findViewById(R.id.buttonInformation);
         infoButton.setOnClickListener(new View.OnClickListener() {
