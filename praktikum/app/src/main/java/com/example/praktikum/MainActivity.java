@@ -2,6 +2,7 @@ package com.example.praktikum;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -10,11 +11,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    private long backPressedTime;
+    private Toast backToast;
     private Button einkaufButton;
     private Button stockButton;
     private Button cookingButton;
@@ -129,5 +133,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed(){
+        if (backPressedTime + 2000 > System.currentTimeMillis()){
+            backToast.cancel();
+            //super.onBackPressed();
+            moveTaskToBack(true);
+            return;
+        } else{
+            setAppLanguage(appLanguage);
+            backToast=  Toast.makeText(getBaseContext(),R.string.press_back_again, Toast.LENGTH_SHORT);
+           backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
+    }
 }

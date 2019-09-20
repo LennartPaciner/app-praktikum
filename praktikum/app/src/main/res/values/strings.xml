@@ -9,4 +9,5 @@
     <string name="my_stock">Mein Vorrat</string>
     <string name="information_text">Wir hoffen Sie sind zufrienden mit:</string>
     <string name="developer_team">Ihr Entwickler-Team:</string>
+    <string name="press_back_again">Zum Beenden erneut drücken</string>
 </resources>
