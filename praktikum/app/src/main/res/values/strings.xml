@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">WhatsThere</string>
-    <string name="product_name">Produkt</string>
-    <string name="amount">Menge</string>
-    <string name="best_before_date">MHD</string>
-    <string name="restock">Auffüllen</string>
+    <string name="product_name"><u>Produkt</u></string>
+    <string name="amount"><u>Menge</u></string>
+    <string name="best_before_date"><u>MHD</u></string>
+    <string name="restock"><u>Auffüllen</u></string>
     <string name="insert_product_name">Produktnamen eingeben:</string>
     <string name="my_grocery_list">Meine Einkaufsliste</string>
     <string name="my_stock">Mein Vorrat</string>
