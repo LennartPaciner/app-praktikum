@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/my_stock"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="24sp"
-        app:fontFamily="sans-serif-black"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,8 +56,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/product_name"
-                            android:textColor="#000000"
-                            app:fontFamily="serif" />
+                            android:textSize="18sp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -72,8 +70,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/amount"
-                            android:textColor="#000000"
-                            app:fontFamily="serif" />
+                            android:textSize="18sp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -87,8 +84,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/best_before_date"
-                            android:textColor="#000000"
-                            app:fontFamily="serif" />
+                            android:textSize="18sp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -102,8 +98,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/restock"
-                            android:textColor="#000000"
-                            app:fontFamily="serif" />
+                            android:textSize="18sp" />
                     </FrameLayout>
 
                 </LinearLayout>
