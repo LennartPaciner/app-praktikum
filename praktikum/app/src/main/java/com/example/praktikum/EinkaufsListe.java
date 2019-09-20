@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -100,33 +102,54 @@ public class EinkaufsListe extends AppCompatActivity {
                 JSONObject object = arr.getJSONObject(i);
                 String name = object.getString("name");
                 //int amount = object.getInt("amount");
+
                 TableLayout tableLayout = findViewById(R.id.tableLayout1);
                 TableRow rowLayout = findViewById(R.id.rowLayout);
+                LinearLayout linearLayout = findViewById(R.id.linearLayout2);
+                FrameLayout frameLayout = findViewById(R.id.frameLayoutProduct);
                 TextView columnLayout = findViewById(R.id.columnLayout);
 
                 TableRow neu = new TableRow(this);
+                LinearLayout neuLL = new LinearLayout(this);
+                neuLL.setLayoutParams(linearLayout.getLayoutParams());
 
+                // add name TV
+                FrameLayout nameFL = new FrameLayout(this);
                 TextView nameTV = new TextView(this);
+                nameFL.setLayoutParams(frameLayout.getLayoutParams());
                 nameTV.setLayoutParams(columnLayout.getLayoutParams());
-                TextView amountTV = new TextView(this);
-                amountTV.setLayoutParams(columnLayout.getLayoutParams());
-                CheckBox checkBox = new CheckBox(this);
-                checkBox.setLayoutParams(columnLayout.getLayoutParams());
-                Button qr = new Button(this);
-                qr.setLayoutParams(columnLayout.getLayoutParams());
-
-
                 nameTV.setText(name);
+                nameFL.addView(nameTV);
+                neuLL.addView(nameFL);
+
+                // add amount TV
+                FrameLayout amountFL = new FrameLayout(this);
+                TextView amountTV = new TextView(this);
+                amountFL.setLayoutParams(frameLayout.getLayoutParams());
+                amountTV.setLayoutParams(columnLayout.getLayoutParams());
                 amountTV.setText("1");
+                amountFL.addView(amountTV);
+                neuLL.addView(amountFL);
 
-                checkBox.setText("");
-                qr.setText("btn2");
 
-                neu.addView(nameTV);
-                neu.addView(amountTV);
-                neu.addView(checkBox);
-                neu.addView(qr);
+                // add amount checkBox
+                FrameLayout checkBoxFL = new FrameLayout(this);
+                CheckBox checkBoxTV = new CheckBox(this);
+                checkBoxFL.setLayoutParams(frameLayout.getLayoutParams());
+                checkBoxTV.setLayoutParams(columnLayout.getLayoutParams());
+                checkBoxFL.addView(checkBoxTV);
+                neuLL.addView(checkBoxFL);
 
+                // add qr
+                FrameLayout qrFL = new FrameLayout(this);
+                Button qrBtn = new Button(this);
+                qrFL.setLayoutParams(frameLayout.getLayoutParams());
+                qrBtn.setLayoutParams(columnLayout.getLayoutParams());
+                qrBtn.setText("QR");
+                qrFL.addView(qrBtn);
+                neuLL.addView(qrFL);
+
+                neu.addView(neuLL);
                 tableLayout.addView(neu);
 
             }catch (JSONException e){
@@ -182,10 +205,8 @@ public class EinkaufsListe extends AppCompatActivity {
                 }
 
             }
-	Toast.makeText(this, resultSet.toString(), Toast.LENGTH_LONG).show();
         return resultSet;
         }
-        Toast.makeText(this, resultSet.toString(), Toast.LENGTH_LONG).show();
         return resultSet;
     }
 
@@ -203,9 +224,17 @@ public class EinkaufsListe extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,
                                         int whichButton) {
                         if(!checkNameInEinkaufsListe(input1.toString())){
-                            float input = Float.parseFloat(input2.getText().toString());
-                            String amount = df2.format(input);
-                            addItemEinkaufsliste(null, input1.getText().toString(),amount , null, null);
+                            if(input2.getText().toString().equals("")){
+                                addItemEinkaufsliste(null, input1.getText().toString(),null , null, null);
+                                Intent intentEL = new Intent(EinkaufsListe.this, EinkaufsListe.class);
+                                startActivity(intentEL);
+                            }else{
+                                float input = Float.parseFloat(input2.getText().toString());
+                                String amount = df2.format(input);
+                                addItemEinkaufsliste(null, input1.getText().toString(),amount , null, null);
+                                Intent intentEL = new Intent(EinkaufsListe.this, EinkaufsListe.class);
+                                startActivity(intentEL);
+                            }
                         }
                     }
                 }).setNegativeButton("Cancel",
