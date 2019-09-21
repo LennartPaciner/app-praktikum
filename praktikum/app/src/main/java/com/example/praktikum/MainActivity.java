@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.SparseLongArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -26,12 +27,24 @@ public class MainActivity extends AppCompatActivity {
     private ToggleButton languageButton;
     private String appLanguage;
     private Button infoButton;
+    private Thread myThread;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    /*    myThread = new Thread(){
+            @Override
+            public void run() {
+                Intent intent = new Intent(getApplicationContext(), SplashScreenActivity.class);
+                startActivity(intent);
+            }
+        };
+        myThread.start();
+*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         appLanguage = getResources().getConfiguration().locale.toString();     // returns active language code
 
