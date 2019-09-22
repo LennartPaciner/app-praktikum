@@ -17,14 +17,11 @@ public class CookingRecipe extends AppCompatActivity {
     private TextView textView;
     private ImageView imageView;
     private Button button;
-    private CookingView cookingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cooking_recipe);
-
-        final CookingView cookingView = new CookingView();
 
 
         textView = findViewById(R.id.textRezept);
@@ -41,7 +38,9 @@ public class CookingRecipe extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goBack();
+                //Müssen noch UI speichern ansonsten löscht er alles. Oder wir lassen den button weg und gehen übers handy zurück, das funktioniert.
+                //goBack();
+
             }
         });
     }
@@ -60,9 +59,9 @@ public class CookingRecipe extends AppCompatActivity {
         });
     }
 
-    public void goBack(){
+    //public void goBack(){
 
-        Intent intent = new Intent(this, CookingView.class);
-        startActivity(intent);
-    }
+      //  Intent intent = new Intent(this, CookingView.class);
+        //startActivity(intent);
+    //}
 }

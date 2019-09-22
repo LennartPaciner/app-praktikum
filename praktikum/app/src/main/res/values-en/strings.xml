@@ -3,7 +3,7 @@
     <string name="app_name">WhatsThere</string>
     <string name="product_name"><u>Product</u></string>
     <string name="amount"><u>Amount</u></string>
-    <string name="best_before_date"><u>BBD</u></string>
+    <string name="best_before_date"><u>Delete</u></string>
     <string name="restock"><u>Restock</u></string>
     <string name="insert_product_name">Insert product name:</string>
     <string name="my_grocery_list">My Grocery List</string>

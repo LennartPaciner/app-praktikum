@@ -176,9 +176,6 @@ public class CookingView extends AppCompatActivity {
                 qrBtn.setText("Rezept");
                 qrFL.addView(qrBtn);
                 neuLL.addView(qrFL);
-
-                neu.addView(neuLL);
-                tableLayout.addView(neu);
                 qrBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -187,6 +184,10 @@ public class CookingView extends AppCompatActivity {
                     }
                 });
 
+                neu.addView(neuLL);
+                tableLayout.addView(neu);
+
+
             } catch (JSONException e) {
                 Log.e("Einkaufsliste", e.getMessage());
                 e.printStackTrace();
@@ -194,6 +195,7 @@ public class CookingView extends AppCompatActivity {
         }
         return arr;
     }
+
 
     public void openRecipe() {
         String description = getDescription(jsonArray2);
