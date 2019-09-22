@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textViewStyle">@style/TextViewTheme</item>
         <item name="android:fontFamily">@font/concert_one</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 
