@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="#D2FAFB"
     tools:context=".MainActivity">
+
 
     <ToggleButton
         android:id="@+id/toggleLanguage"
@@ -14,6 +16,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
         android:background="@drawable/toggle_selector"
         android:checked="true"
         android:textOff=""
@@ -21,89 +24,186 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_below="@+id/toggleLanguage"
+        android:layout_width="364dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:fontFamily="serif"
+        android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
 
-            <Button
-                android:id="@+id/buttonCheckList"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@drawable/shopping_basket"
-                android:visibility="visible" />
+    <LinearLayout
+        android:id="@+id/ersterbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        >
 
-            <Space
-                android:layout_width="50dp"
-                android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/buttonStock"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@drawable/fridge" />
-        </TableRow>
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/shoppinglist"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingTop="100dp">
+        <Button
+            android:id="@+id/buttonCheckList"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/shopping_basket"
+            android:visibility="visible"
 
-            <Button
-                android:id="@+id/buttonCooking"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@drawable/chef" />
 
-            <Space
-                android:layout_width="50dp"
-                android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/buttonRecipe"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@drawable/recipe_book" />
-        </TableRow>
+            />
 
-    </TableLayout>
+    </LinearLayout>
+
+    <Space
+        android:layout_width="50dp"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/zweiterbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/ersterbutton"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView"
+
+        >
+
+
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/stock"
+            android:textStyle="bold"
+
+            android:layout_margin="10dp"/>
+        <Button
+
+            android:id="@+id/buttonStock"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/fridge"
+
+            />
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/dritterbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ersterbutton"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        >
+
+
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/cooking"
+            android:textStyle="bold"
+
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/buttonCooking"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/chef"
+
+            />
+
+    </LinearLayout>
+
+
+
+
+    <Space
+        android:layout_width="50dp"
+        android:layout_height="wrap_content" />
+
+
+
+
+    <LinearLayout
+        android:id="@+id/vierterbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/ersterbutton"
+        android:orientation="vertical"
+
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/zweiterbutton"
+        android:layout_marginTop="30dp"
+        >
+
+
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/recipes"
+            android:textStyle="bold"
+
+            android:layout_margin="10dp"/>
+        <Button
+            android:id="@+id/buttonRecipe"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/recipe_book"
+
+            />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/buttonInformation"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="100px"
+        android:layout_height="100px"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/information"
         android:minWidth="0dip"
         android:minHeight="0dip"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="30sp"
-        app:fontFamily="@font/concert_one"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
