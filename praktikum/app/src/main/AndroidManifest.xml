@@ -3,6 +3,9 @@
     package="com.example.praktikum">
 
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.INTERNET">
+
+    </uses-permission>
 
     <application
         android:allowBackup="true"
