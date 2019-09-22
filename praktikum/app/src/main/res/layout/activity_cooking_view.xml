@@ -120,7 +120,9 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/concert_one"
                             android:text="Anleitung"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            tools:layout_editor_absoluteX="170dp"
+                            tools:layout_editor_absoluteY="25dp"/>
                     </FrameLayout>
 
                 </LinearLayout>
