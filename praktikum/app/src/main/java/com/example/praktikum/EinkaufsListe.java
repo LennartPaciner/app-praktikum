@@ -219,7 +219,7 @@ public class EinkaufsListe extends AppCompatActivity {
         final EditText input2 =  textEntryView.findViewById(R.id.edit2);
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Produktname und Menge:").setView(textEntryView).setPositiveButton("Save",
+        alert.setTitle(R.string.product_and_amount).setView(textEntryView).setPositiveButton(R.string.save,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int whichButton) {
@@ -237,7 +237,7 @@ public class EinkaufsListe extends AppCompatActivity {
                             }
                         }
                     }
-                }).setNegativeButton("Cancel",
+                }).setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int whichButton) {

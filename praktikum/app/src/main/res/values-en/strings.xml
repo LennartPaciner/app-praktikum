@@ -13,4 +13,12 @@
     <string name="press_back_again">Press again to exit</string>
     <string name="cooking">Cooking</string>
     <string name="recipes">Recipes</string>
+    <string name="product_and_amount">Product name and amount:</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="insert_food">Insert food:</string>
+    <string name="amount_in_gram">Amount in gram</string>
+    <string name="instructions"><u>Instructions</u></string>
+    <string name="back">Back</string>
+    <string name="category"><u>Category</u></string>
 </resources>
