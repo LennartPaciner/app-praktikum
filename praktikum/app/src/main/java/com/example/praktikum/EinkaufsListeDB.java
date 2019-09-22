@@ -15,7 +15,7 @@ import java.sql.Date;
 import static java.sql.Types.BIT;
 
 public class EinkaufsListeDB extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "DB26.db";
+    public static final String DATABASE_NAME = "DB11.db";
     public static final int DATABASE_VERSION = 1;
 
     public EinkaufsListeDB(Context context) {
@@ -33,9 +33,9 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
 
         final String SQL_CREATE_VORRAT_TABLE = "CREATE TABLE " + GroceryEntry.TABLE_NAME2 + " (" + GroceryEntry.COLUMN_ID +
                 " INTEGER PRIMARY KEY AUTOINCREMENT, " + GroceryEntry.COLUMN_BARCODE +
-                " INTEGER NOT NULL, "  +GroceryEntry.COLUMN_NAME + " TEXT NOT NULL, "  +
-                GroceryEntry.COLUMN_AMOUNT + " TEXT NOT NULL, " + GroceryEntry.COLUMN_MHD + " TEXT NOT NULL, " +
-                GroceryEntry.COLUMN_RESTOCK + " INTEGER NOT NULL);";
+                " INTEGER, "  +GroceryEntry.COLUMN_NAME + " TEXT NOT NULL, "  +
+                GroceryEntry.COLUMN_AMOUNT + " TEXT DEFAULT '1', " + GroceryEntry.COLUMN_MHD + " TEXT, " +
+                GroceryEntry.COLUMN_RESTOCK + " INTEGER);";
         db.execSQL(SQL_CREATE_VORRAT_TABLE);
 
     }
@@ -49,14 +49,15 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
 
     }
 
-    public Cursor getAllData(){
+    public Cursor getAllData1(){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * from " + GroceryEntry.TABLE_NAME1,null);
+
     }
 
-    public Cursor getNameData(){
+    public Cursor getIdData2(String name){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT Name from " + GroceryEntry.TABLE_NAME1,null);
+        return db.rawQuery("SELECT * FROM " + GroceryEntry.TABLE_NAME2 + " WHERE Name = " + "'" + name + "'", null);
     }
 
 }
