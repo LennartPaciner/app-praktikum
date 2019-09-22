@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WhatsThere</string>
     <string name="product_name"><u>Produkt</u></string>
@@ -10,9 +11,6 @@
     <string name="information_text">Wir hoffen Sie sind zufrieden mit:</string>
     <string name="developer_team">Ihr Entwickler-Team:</string>
     <string name="press_back_again">Zum Beenden erneut drücken</string>
-    <string name="stock_name">Vorrat</string>
-    <string name="shoppinglist">Einkaufsliste</string>
-    <string name="stock">Vorrat</string>
     <string name="cooking">Kochen</string>
     <string name="recipes">Rezepte</string>
 </resources>
