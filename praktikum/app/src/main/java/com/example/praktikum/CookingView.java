@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +34,9 @@ public class CookingView extends AppCompatActivity {
     private TextView textView;
     private RequestQueue mQueue;
     private String essenApi;
+    private JSONArray jsonArray2;
+    public static final String EXTRA_DESC = "intent_desc";
+    public static final String EXTRA_IMAGE = "intent_image";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,6 @@ public class CookingView extends AppCompatActivity {
         Button buttonP = findViewById(R.id.button_parse);
 
 
-
         mQueue = Volley.newRequestQueue(this);
         buttonP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,11 +55,10 @@ public class CookingView extends AppCompatActivity {
             }
         });
 
-        //createView();
 
     }
 
-    public void openDialog(){
+    public void openDialog() {
         LayoutInflater factory = LayoutInflater.from(this);
         final View textEntryView = factory.inflate(R.layout.text_entry2, null);
 
@@ -81,14 +83,14 @@ public class CookingView extends AppCompatActivity {
     }
 
     //public String getText(){
-        //EditText editText = findViewById(R.id.edit_text);
-      //  String essen = editText.getText().toString();
-        //Toast.makeText(this, essen, Toast.LENGTH_SHORT).show();
-        //return essen;
+    //EditText editText = findViewById(R.id.edit_text);
+    //  String essen = editText.getText().toString();
+    //Toast.makeText(this, essen, Toast.LENGTH_SHORT).show();
+    //return essen;
 
     //}
 
-    public void jsonParse(String essen){
+    public void jsonParse(String essen) {
         //String url = "https://www.themealdb.com/api/json/v1/1/random.php";
         String url = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + essen;
 
@@ -98,6 +100,7 @@ public class CookingView extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("meals");
+                            jsonArray2 = response.getJSONArray("meals");
 
                             createView(jsonArray);
 
@@ -113,19 +116,19 @@ public class CookingView extends AppCompatActivity {
         });
 
         mQueue.add(request);
-        //Toast.makeText(getApplicationContext(), resultEssen.toString(), Toast.LENGTH_LONG).show();
 
 
     }
 
-    public JSONArray createView(JSONArray arr){
+    public JSONArray createView(JSONArray arr) {
 
-        for(int i = 0; i < arr.length(); i++){
-            try{
+        for (int i = 0; i < arr.length(); i++) {
+            try {
                 JSONObject object = arr.getJSONObject(i);
                 String name = object.getString("strMeal");
                 String category = object.getString("strCategory");
-                //int amount = object.getInt("amount");
+                String id = object.getString("idMeal");
+
 
                 TableLayout tableLayout = findViewById(R.id.tableLayout1);
                 TableRow rowLayout = findViewById(R.id.rowLayout);
@@ -156,31 +159,84 @@ public class CookingView extends AppCompatActivity {
                 neuLL.addView(amountFL);
 
 
-                // add amount checkBox
-                FrameLayout checkBoxFL = new FrameLayout(this);
-                CheckBox checkBoxTV = new CheckBox(this);
-                checkBoxFL.setLayoutParams(frameLayout.getLayoutParams());
-                checkBoxTV.setLayoutParams(columnLayout.getLayoutParams());
-                checkBoxFL.addView(checkBoxTV);
-                neuLL.addView(checkBoxFL);
+                // add Id
+                FrameLayout idFL = new FrameLayout(this);
+                TextView idTV = new TextView(this);
+                idFL.setLayoutParams(frameLayout.getLayoutParams());
+                idTV.setLayoutParams(columnLayout.getLayoutParams());
+                idTV.setText(id);
+                idFL.addView(idTV);
+                neuLL.addView(idFL);
 
-                // add qr
+                // add button
                 FrameLayout qrFL = new FrameLayout(this);
                 Button qrBtn = new Button(this);
                 qrFL.setLayoutParams(frameLayout.getLayoutParams());
                 qrBtn.setLayoutParams(columnLayout.getLayoutParams());
-                qrBtn.setText("QR");
+                qrBtn.setText("Rezept");
                 qrFL.addView(qrBtn);
                 neuLL.addView(qrFL);
 
                 neu.addView(neuLL);
                 tableLayout.addView(neu);
+                qrBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        openRecipe();
 
-            }catch (JSONException e){
+                    }
+                });
+
+            } catch (JSONException e) {
                 Log.e("Einkaufsliste", e.getMessage());
                 e.printStackTrace();
             }
         }
         return arr;
+    }
+
+    public void openRecipe() {
+        String description = getDescription(jsonArray2);
+        String imageApi = getImage(jsonArray2);
+        //Toast.makeText(this, imageApi, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, CookingRecipe.class);
+        intent.putExtra(EXTRA_DESC, description);
+        intent.putExtra(EXTRA_IMAGE, imageApi);
+
+        startActivity(intent);
+    }
+
+    public String getDescription(JSONArray array) {
+        //gibt immer das gleiche aus. Brauchen für jede reihe speziellen button oder beschreibung per id vergleichen und so die richtige
+        //auslesen aus json array. Noch fixen. Hilfe maurice
+
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject object = array.getJSONObject(i);
+                String descr = object.getString("strInstructions");
+                return descr;
+            } catch (JSONException e) {
+                Log.e("Einkaufsliste", e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        return "Fehler";
+    }
+
+    public String getImage(JSONArray array) {
+        //gibt immer das gleiche aus. Brauchen für jede reihe speziellen button oder beschreibung per id vergleichen und so die richtige
+        //auslesen aus json array. Noch fixen. Hilfe maurice
+
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject object = array.getJSONObject(i);
+                String image = object.getString("strMealThumb");
+                return image;
+            } catch (JSONException e) {
+                Log.e("Einkaufsliste", e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        return "Fehler";
     }
 }
