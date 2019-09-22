@@ -101,7 +101,7 @@ public class EinkaufsListe extends AppCompatActivity {
             try{
                 JSONObject object = arr.getJSONObject(i);
                 String name = object.getString("name");
-                //int amount = object.getInt("amount");
+                int amount = object.getInt("menge");
 
                 TableLayout tableLayout = findViewById(R.id.tableLayout1);
                 TableRow rowLayout = findViewById(R.id.rowLayout);
@@ -127,7 +127,7 @@ public class EinkaufsListe extends AppCompatActivity {
                 TextView amountTV = new TextView(this);
                 amountFL.setLayoutParams(frameLayout.getLayoutParams());
                 amountTV.setLayoutParams(columnLayout.getLayoutParams());
-                amountTV.setText("1");
+                amountTV.setText(amount + " gramm");
                 amountFL.addView(amountTV);
                 neuLL.addView(amountFL);
 
