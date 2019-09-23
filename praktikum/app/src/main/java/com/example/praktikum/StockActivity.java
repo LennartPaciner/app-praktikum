@@ -35,12 +35,11 @@ public class StockActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock);
 
-
         EinkaufsListeDB einkaufsListeDB = new EinkaufsListeDB(this);
         EinkaufsListe einkaufsListe2 = new EinkaufsListe();
         database = einkaufsListeDB.getWritableDatabase();
         einkaufsListe = einkaufsListe2;
-        createVorratliste(einkaufsListe2.getProductAll(einkaufsListeDB.getAllData1()));
+        createVorratliste(einkaufsListe2.getProductAll(einkaufsListeDB.getAllData2()));
 
 
         einkaufButton = findViewById(R.id.buttonCheckList);
