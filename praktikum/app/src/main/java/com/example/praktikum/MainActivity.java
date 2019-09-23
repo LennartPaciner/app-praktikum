@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Toast backToast;
     private ToggleButton languageButton;
     public String appLanguage;
-m7
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
