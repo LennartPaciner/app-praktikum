@@ -15,7 +15,7 @@ import java.sql.Date;
 import static java.sql.Types.BIT;
 
 public class EinkaufsListeDB extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "DB11.db";
+    public static final String DATABASE_NAME = "DB12.db";
     public static final int DATABASE_VERSION = 1;
 
     public EinkaufsListeDB(Context context) {

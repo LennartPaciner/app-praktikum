@@ -210,6 +210,7 @@ public class EinkaufsListe extends AppCompatActivity {
 
     }
 
+
     public void updateItemDB(int id, ContentValues content){
         database.update(DBHelper.GroceryEntry.TABLE_NAME2, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
         //ContentValues con = new ContentValues();
