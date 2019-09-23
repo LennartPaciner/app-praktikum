@@ -193,16 +193,16 @@
 
     <Button
         android:id="@+id/buttonInformation"
-        android:layout_width="100px"
-        android:layout_height="100px"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/information"
         android:minWidth="0dip"
-        android:minHeight="0dip"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true" />
+        android:minHeight="0dip" />
 
 
 </RelativeLayout>
