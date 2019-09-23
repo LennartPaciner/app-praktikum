@@ -2,18 +2,14 @@ package com.example.praktikum;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.SparseLongArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -22,9 +18,10 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private long backPressedTime;
     private Toast backToast;
+    private Button cookingButton;
     private Button einkaufButton;
     private Button stockButton;
-    private Button cookingButton;
+    private Button recipeButton;
     private ToggleButton languageButton;
     public String appLanguage;
     private Button infoButton;
@@ -76,11 +73,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        cookingButton = findViewById(R.id.buttonCooking);
-        cookingButton.setOnClickListener(new View.OnClickListener() {
+        recipeButton = findViewById(R.id.buttonRecipe);
+        recipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openCookingView();
+            }
+        });
+
+        recipeButton = findViewById(R.id.buttonCooking);
+        recipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCooking();
             }
         });
 
@@ -90,6 +95,12 @@ public class MainActivity extends AppCompatActivity {
     public void openEinkaufsListe(){
         setAppLanguage(appLanguage);
         Intent intent = new Intent(this, EinkaufsListe.class);
+        startActivity(intent);
+    }
+
+    public void openCooking(){
+        setAppLanguage(appLanguage);
+        Intent intent = new Intent(this, Cooking.class);
         startActivity(intent);
     }
 

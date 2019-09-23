@@ -7,19 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class StockActivity extends AppCompatActivity {
+public class Cooking extends AppCompatActivity {
     private Button einkaufButton;
-    private Button homeButton;
     private Button recipeButton;
-    private Button cookingButton;
-    private Button addProduct;
-
-
+    private Button stockButton;
+    private Button homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stock);
+        setContentView(R.layout.activity_cooking);
 
 
         einkaufButton = findViewById(R.id.buttonCheckList);
@@ -34,15 +31,15 @@ public class StockActivity extends AppCompatActivity {
         recipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCookingRecipe();
+                openCookingView();
             }
         });
 
-        cookingButton = findViewById(R.id.buttonCooking);
-        cookingButton.setOnClickListener(new View.OnClickListener() {
+        stockButton = findViewById(R.id.buttonCooking);
+        stockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCookingView();
+                openStockActivity();
             }
         });
 
@@ -55,35 +52,27 @@ public class StockActivity extends AppCompatActivity {
             }
         });
 
-        addProduct = findViewById(R.id.buttonAddGrocery);
-        addProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //should open window for adding items to Stock
-            }
-        });
     }
-
-
-
 
     public void openEinkaufsListe(){
         Intent intent = new Intent(this, EinkaufsListe.class);
         startActivity(intent);
-    }
 
-    public void openCookingRecipe(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
-
     public void openCookingView(){
-        Intent intent = new Intent(this, Cooking.class);
+        Intent intent = new Intent(this, CookingView.class);
         startActivity(intent);
-    }
 
+    }
+    public void openStockActivity(){
+        Intent intent = new Intent(this, StockActivity.class);
+        startActivity(intent);
+
+    }
     public void openMainPage(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+
     }
+
 }
