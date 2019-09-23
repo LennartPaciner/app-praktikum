@@ -179,8 +179,9 @@ public class EinkaufsListe extends AppCompatActivity {
         cv.put(DBHelper.GroceryEntry.COLUMN_MHD, mhd);
         cv.put(DBHelper.GroceryEntry.COLUMN_RESTOCK, restock);
 
-        database.insert(DBHelper.GroceryEntry.TABLE_NAME1, null, cv);
-
+        if (!checkNameInEinkaufsListe1(name)){
+            database.insert(DBHelper.GroceryEntry.TABLE_NAME1, null, cv);
+        }
         if (!checkNameInEinkaufsListe2(name)){
             database.insert(DBHelper.GroceryEntry.TABLE_NAME2, null,cv);
         }
@@ -210,12 +211,10 @@ public class EinkaufsListe extends AppCompatActivity {
 
     }
 
+
     public void updateItemDB(int id, ContentValues content){
         database.update(DBHelper.GroceryEntry.TABLE_NAME2, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
-        //ContentValues con = new ContentValues();
-        //con.put(DBHelper.GroceryEntry.COLUMN_NAME, "nudel");
-        //con.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, 10);
-        //updateItemDB(4, con);
+        
     }
 
     public JSONArray getProductAll(Cursor result) {
@@ -255,7 +254,6 @@ public class EinkaufsListe extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int whichButton) {
-                        if(!checkNameInEinkaufsListe1(input1.toString())){
                             if(input2.getText().toString().equals("")){
                                 addItemEinkaufsliste(null, input1.getText().toString(),null , null, null);
 
@@ -275,7 +273,6 @@ public class EinkaufsListe extends AppCompatActivity {
                                 startActivity(intentEL);
                                 overridePendingTransition(0, 0);
                             }
-                        }
                     }
                 }).setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {

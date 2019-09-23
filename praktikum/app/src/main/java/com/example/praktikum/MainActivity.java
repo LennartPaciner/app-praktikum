@@ -2,14 +2,18 @@ package com.example.praktikum;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.SparseLongArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -18,11 +22,19 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private long backPressedTime;
     private Toast backToast;
+    private Button einkaufButton;
+    private Button stockButton;
+    private Button cookingButton;
+    private Button recipeButton;
+
     private ToggleButton languageButton;
     public String appLanguage;
+    private Button infoButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         languageSetting();
@@ -32,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         createLanguageButton();    // create Language Toggle Button
 
 
-        Button infoButton = findViewById(R.id.buttonInformation);
+        infoButton = findViewById(R.id.buttonInformation);
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Button einkaufButton = findViewById(R.id.buttonCheckList);
+        einkaufButton = findViewById(R.id.buttonCheckList);
         einkaufButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Button recipeButton = findViewById(R.id.buttonRecipe);
+        recipeButton = findViewById(R.id.buttonRecipe);
         recipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Button stockButton = findViewById(R.id.buttonStock);
+        stockButton = findViewById(R.id.buttonStock);
         stockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,15 +79,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button cookingButton = findViewById(R.id.buttonCooking);
+        cookingButton = findViewById(R.id.buttonCooking);
         cookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });
-
-       
     }
+
 
     public void openEinkaufsListe(){
         setAppLanguage(appLanguage);
@@ -85,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openStockActivity(){
         setAppLanguage(appLanguage);
+ 
         Intent intent = new Intent(this, StockActivity.class);
         startActivity(intent);
     }
@@ -116,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public void setAppLanguage(String language) {
         Resources res = getResources();
         Configuration config = res.getConfiguration();
@@ -128,11 +141,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     private void createLanguageButton(){
         languageButton = findViewById(R.id.toggleLanguage);
-        System.out.println("APP LANGUAGE                                                                                  "+appLanguage);
+
         if (appLanguage.startsWith("de")){
             languageButton.setChecked(true);
             appLanguage = "de";

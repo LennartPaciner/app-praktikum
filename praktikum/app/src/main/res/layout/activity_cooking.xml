@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D2FAFB"
-    tools:context=".StockActivity">
+    tools:context=".Cooking">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/my_stock"
+        android:text="@string/cooking"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -42,13 +42,11 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <FrameLayout
-                        android:id="@+id/frameLayoutProduct"
                         android:layout_width="100dp"
                         android:layout_height="match_parent">
 
