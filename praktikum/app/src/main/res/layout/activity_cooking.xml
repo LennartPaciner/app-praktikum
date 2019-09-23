@@ -110,11 +110,10 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/buttonCheckList"
+                android:id="@+id/buttonCooking_CheckList"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:background="@drawable/shopping_basket" />
         </FrameLayout>
 
@@ -124,13 +123,11 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/buttonStock"
+                android:id="@+id/buttonCooking_Stock"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:background="@drawable/fridge" />
-
         </FrameLayout>
 
         <FrameLayout
@@ -139,11 +136,10 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/buttonRecipe"
+                android:id="@+id/buttonCooking_Recipe"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:background="@drawable/recipe_book" />
         </FrameLayout>
 

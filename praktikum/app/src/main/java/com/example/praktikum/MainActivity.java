@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         cookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                openCooking();
             }
         });
     }
@@ -90,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
     public void openEinkaufsListe(){
         setAppLanguage(appLanguage);
         Intent intent = new Intent(this, EinkaufsListe.class);
+        startActivity(intent);
+    }
+
+    public void openCooking(){
+        setAppLanguage(appLanguage);
+        Intent intent = new Intent(this, Cooking.class);
         startActivity(intent);
     }
 

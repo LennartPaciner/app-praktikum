@@ -47,8 +47,7 @@ public class EinkaufsListe extends AppCompatActivity {
     public Button addProduct;
     private static DecimalFormat df2 = new DecimalFormat("#.###");
     public EinkaufsListeDB einkaufsListe;
-    private Button homeButton;
-    private Button stockButton;
+
 
 
     @Override
@@ -67,7 +66,7 @@ public class EinkaufsListe extends AppCompatActivity {
         einkaufsListe = new EinkaufsListeDB(this);
         database = einkaufsListe.getWritableDatabase();
 
-        stockButton = findViewById(R.id.buttonStock);
+        Button stockButton = findViewById(R.id.buttonCheckList_Stock);
         stockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,9 +74,25 @@ public class EinkaufsListe extends AppCompatActivity {
             }
         });
 
+        Button cookingButton = findViewById(R.id.buttonCheckList_Cooking);
+        cookingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCookingActivity();
+            }
+        });
+
+        Button recipeButton = findViewById(R.id.buttonCheckList_Recipe);
+        recipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRecipeActivity();
+            }
+        });
 
 
-        homeButton = findViewById(R.id.buttonHome);
+
+        Button homeButton = findViewById(R.id.buttonHome);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -320,6 +335,16 @@ public class EinkaufsListe extends AppCompatActivity {
 
     public void openStockActivity(){
         Intent intent = new Intent(this, StockActivity.class);
+        startActivity(intent);
+    }
+
+    public void openCookingActivity(){
+        Intent intent = new Intent(this, Cooking.class);
+        startActivity(intent);
+    }
+
+    public void openRecipeActivity(){
+        Intent intent = new Intent(this, CookingView.class);
         startActivity(intent);
     }
 

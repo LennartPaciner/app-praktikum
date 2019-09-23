@@ -166,11 +166,24 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/buttonStock"
+                android:id="@+id/buttonRecipe_CheckList"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:background="@drawable/shopping_basket"
+                android:gravity="center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/buttonRecipe_Stock"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
                 android:background="@drawable/fridge" />
         </FrameLayout>
 
@@ -180,26 +193,11 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/buttonStock"
+                android:id="@+id/buttonRecipe_Cooking"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:background="@drawable/chef" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <Button
-                android:id="@+id/buttonRecipe"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/recipe_book" />
         </FrameLayout>
 
     </LinearLayout>
