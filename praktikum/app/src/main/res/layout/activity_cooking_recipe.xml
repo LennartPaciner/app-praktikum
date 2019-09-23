@@ -21,18 +21,19 @@
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="40dp"
-        android:text="Back"
-        android:textSize="20sp"
-        android:layout_alignParentRight="true"/>
+        android:text="@string/back"
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/textBeschreibung"
-        android:textSize="20sp"
-        android:text="Anleitung:"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@id/imageRezept"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageRezept"
+        android:layout_marginBottom="10dp"
+        android:text="@string/instructions"
+        android:textSize="20sp" />
 
     <ScrollView
         android:id="@+id/scroll"
