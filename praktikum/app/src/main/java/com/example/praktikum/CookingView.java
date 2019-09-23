@@ -65,14 +65,14 @@ public class CookingView extends AppCompatActivity {
         final EditText input = textEntryView.findViewById(R.id.edit3);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Essen eingeben").setView(textEntryView).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.insert_food).setView(textEntryView).setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 essenApi = input.getText().toString();
                 //Toast.makeText(getApplicationContext(), essenApi, Toast.LENGTH_LONG).show();
                 jsonParse(essenApi);
             }
-        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 return;
