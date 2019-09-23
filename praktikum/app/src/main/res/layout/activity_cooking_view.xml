@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D2FAFB"
-    tools:context=".EinkaufsListe">
+    tools:context=".CookingView">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/concert_one"
-        android:text="@string/my_grocery_list"
+        android:text="@string/recipes"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -69,7 +69,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/concert_one"
-                            android:text="@string/product_name"
+                            android:text="Name"
                             android:textSize="18sp"
                             tools:layout_editor_absoluteX="-125dp"
                             tools:layout_editor_absoluteY="25dp" />
@@ -86,7 +86,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/concert_one"
-                            android:text="@string/amount"
+                            android:text="@string/category"
                             android:textSize="18sp"
                             tools:layout_editor_absoluteX="-20dp"
                             tools:layout_editor_absoluteY="25dp" />
@@ -103,7 +103,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/concert_one"
-                            android:text="@string/best_before_date"
+                            android:text="ID"
                             android:textSize="18sp"
                             tools:layout_editor_absoluteX="85dp"
                             tools:layout_editor_absoluteY="25dp" />
@@ -120,8 +120,10 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/concert_one"
-                            android:text="@string/restock"
-                            android:textSize="18sp" />
+                            android:text="@string/instructions"
+                            android:textSize="18sp"
+                            tools:layout_editor_absoluteX="170dp"
+                            tools:layout_editor_absoluteY="25dp" />
                     </FrameLayout>
 
                 </LinearLayout>
@@ -132,7 +134,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/buttonAddGrocery"
+        android:id="@+id/button_parse"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="10dp"

@@ -5,33 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D2FAFB"
-    tools:context=".EinkaufsListe">
+    tools:context=".StockActivity">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/concert_one"
-        android:text="@string/my_grocery_list"
+        android:text="@string/my_stock"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/SView"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ScrollView
-        android:id="@+id/SView"
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
@@ -52,13 +42,11 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <FrameLayout
-                        android:id="@+id/frameLayoutProduct"
                         android:layout_width="100dp"
                         android:layout_height="match_parent">
 
@@ -68,11 +56,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:fontFamily="@font/concert_one"
                             android:text="@string/product_name"
-                            android:textSize="18sp"
-                            tools:layout_editor_absoluteX="-125dp"
-                            tools:layout_editor_absoluteY="25dp" />
+                            android:textSize="18sp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -85,11 +70,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:fontFamily="@font/concert_one"
                             android:text="@string/amount"
-                            android:textSize="18sp"
-                            tools:layout_editor_absoluteX="-20dp"
-                            tools:layout_editor_absoluteY="25dp" />
+                            android:textSize="18sp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -102,11 +84,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:fontFamily="@font/concert_one"
                             android:text="@string/best_before_date"
-                            android:textSize="18sp"
-                            tools:layout_editor_absoluteX="85dp"
-                            tools:layout_editor_absoluteY="25dp" />
+                            android:textSize="18sp" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -119,7 +98,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:fontFamily="@font/concert_one"
                             android:text="@string/restock"
                             android:textSize="18sp" />
                     </FrameLayout>
@@ -138,10 +116,18 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/add_1"
-        app:layout_constraintBottom_toTopOf="@+id/SView"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -151,7 +137,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SView">
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
         <FrameLayout
             android:layout_width="100dp"
@@ -159,12 +145,12 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/buttonStock"
+                android:id="@+id/buttonCheckList"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/fridge" />
+                android:background="@drawable/shopping_basket" />
         </FrameLayout>
 
         <FrameLayout
@@ -179,6 +165,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/chef" />
+
         </FrameLayout>
 
         <FrameLayout
@@ -204,7 +191,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/home"
-        app:layout_constraintBottom_toTopOf="@+id/SView"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
