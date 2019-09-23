@@ -2,18 +2,14 @@ package com.example.praktikum;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.SparseLongArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -22,38 +18,21 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private long backPressedTime;
     private Toast backToast;
-    private Button einkaufButton;
-    private Button stockButton;
-    private Button cookingButton;
-    private Button recipeButton;
-
     private ToggleButton languageButton;
     public String appLanguage;
-    private Button infoButton;
- //   private Thread myThread;
-
-
+m7
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    /*    myThread = new Thread(){
-            @Override
-            public void run() {
-                Intent intent = new Intent(getApplicationContext(), SplashScreenActivity.class);
-                startActivity(intent);
-            }
-        };
-        myThread.start();
-*/
         super.onCreate(savedInstanceState);
 
-        defaultLanguage();
+        languageSetting();
 
         setContentView(R.layout.activity_main);
 
         createLanguageButton();    // create Language Toggle Button
 
 
-        infoButton = findViewById(R.id.buttonInformation);
+        Button infoButton = findViewById(R.id.buttonInformation);
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        einkaufButton = findViewById(R.id.buttonCheckList);
+        Button einkaufButton = findViewById(R.id.buttonCheckList);
         einkaufButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        recipeButton = findViewById(R.id.buttonRecipe);
+        Button recipeButton = findViewById(R.id.buttonRecipe);
         recipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        stockButton = findViewById(R.id.buttonStock);
+        Button stockButton = findViewById(R.id.buttonStock);
         stockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        cookingButton = findViewById(R.id.buttonCooking);
+        Button cookingButton = findViewById(R.id.buttonCooking);
         cookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void openStockActivity(){
         setAppLanguage(appLanguage);
-   //     System.out.println("Locale.getDefault().getLanguage():     "+Locale.getDefault().getLanguage());
-   //     System.out.println("getResources().getConfiguration().locale:     "+getResources().getConfiguration().locale);
         Intent intent = new Intent(this, StockActivity.class);
         startActivity(intent);
     }
@@ -125,15 +102,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void defaultLanguage(){
-        if (getIntent().getStringExtra("language") != null){
-            appLanguage = getIntent().getStringExtra("language");
+    private void languageSetting(){
+        if (getIntent().getStringExtra("startingLanguage") != null) {
+            appLanguage = getResources().getConfiguration().locale.toString();
+            getIntent().removeExtra("startingLanguage");
         }else{
-            appLanguage = getResources().getConfiguration().locale.toString();     // returns active language code
+            if (getIntent().getStringExtra("language") != null){
+                appLanguage = getIntent().getStringExtra("language");
+            }else{
+                appLanguage = getResources().getConfiguration().locale.toString();     // returns active language code
+            }
+            setAppLanguage(appLanguage);
         }
-        setAppLanguage(appLanguage);
     }
-
 
     public void setAppLanguage(String language) {
         Resources res = getResources();
@@ -147,9 +128,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
     private void createLanguageButton(){
         languageButton = findViewById(R.id.toggleLanguage);
-
+        System.out.println("APP LANGUAGE                                                                                  "+appLanguage);
         if (appLanguage.startsWith("de")){
             languageButton.setChecked(true);
             appLanguage = "de";
