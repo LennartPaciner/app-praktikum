@@ -58,10 +58,8 @@
 
         <TextView
             android:id="@+id/groceryTextView"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="@string/my_grocery_list"
@@ -91,9 +89,9 @@
         android:layout_alignRight="@+id/ersterbutton"
         android:layout_alignParentRight="true"
         android:layout_marginTop="30dp"
-        android:orientation="vertical"
+        android:layout_marginRight="20dp"
 
-        >
+        android:orientation="vertical">
 
 
         <TextView
@@ -101,8 +99,6 @@
             android:layout_width="150dp"
 
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="@string/my_stock"
@@ -135,12 +131,10 @@
 
         <TextView
             android:id="@+id/cookingTextView"
-            android:layout_width="150dp"
-
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
+
             android:gravity="center"
             android:text="@string/cooking"
             android:textStyle="bold" />
@@ -172,17 +166,16 @@
 
         android:layout_alignRight="@+id/ersterbutton"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
         android:gravity="center"
         android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/recipeTextView"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="@string/recipes"
