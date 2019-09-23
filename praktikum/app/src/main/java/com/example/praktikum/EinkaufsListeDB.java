@@ -55,6 +55,12 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
 
     }
 
+    public Cursor getAllData2(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * from " + GroceryEntry.TABLE_NAME2,null);
+
+    }
+
     public Cursor getIdData2(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + GroceryEntry.TABLE_NAME2 + " WHERE Name = " + "'" + name + "'", null);
