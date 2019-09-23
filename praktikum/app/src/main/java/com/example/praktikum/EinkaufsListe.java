@@ -261,7 +261,9 @@ public class EinkaufsListe extends AppCompatActivity {
 
 
                                 Intent intentEL = new Intent(EinkaufsListe.this, EinkaufsListe.class);
+                                overridePendingTransition(0, 0);
                                 startActivity(intentEL);
+                                overridePendingTransition(0, 0);
                             }else{
                                 float input = Float.parseFloat(input2.getText().toString());
                                 String amount = df2.format(input);
@@ -269,7 +271,9 @@ public class EinkaufsListe extends AppCompatActivity {
 
 
                                 Intent intentEL = new Intent(EinkaufsListe.this, EinkaufsListe.class);
+                                overridePendingTransition(0, 0);
                                 startActivity(intentEL);
+                                overridePendingTransition(0, 0);
                             }
                         }
                     }
