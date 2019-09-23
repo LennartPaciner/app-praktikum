@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private Button einkaufButton;
     private Button stockButton;
     private Button cookingButton;
+    private Button recipeButton;
+
     private ToggleButton languageButton;
     public String appLanguage;
     private Button infoButton;
@@ -68,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        recipeButton = findViewById(R.id.buttonRecipe);
+        recipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCookingView();
+            }
+        });
+
+
         stockButton = findViewById(R.id.buttonStock);
         stockButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         cookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCookingView();
             }
         });
 

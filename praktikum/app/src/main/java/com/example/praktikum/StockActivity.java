@@ -73,12 +73,12 @@ public class StockActivity extends AppCompatActivity {
     }
 
     public void openCookingRecipe(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, CookingRecipe.class);
         startActivity(intent);
     }
 
     public void openCookingView(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, CookingView.class);
         startActivity(intent);
     }
 
