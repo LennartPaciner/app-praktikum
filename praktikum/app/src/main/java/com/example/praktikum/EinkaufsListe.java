@@ -166,12 +166,35 @@ public class EinkaufsListe extends AppCompatActivity {
 
                 // add qr
                 FrameLayout qrFL = new FrameLayout(this);
-                Button qrBtn = new Button(this);
+                final Button qrBtn = new Button(this);
                 qrFL.setLayoutParams(frameLayout.getLayoutParams());
                 qrBtn.setLayoutParams(columnLayout.getLayoutParams());
-                qrBtn.setText("QR");
+                int tmp = i+1;
+                qrBtn.setText(String.valueOf(tmp));
                 qrFL.addView(qrBtn);
                 neuLL.addView(qrFL);
+                qrBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int buttonID = Integer.parseInt(qrBtn.getText().toString());
+
+
+                        JSONArray resultID = getProductAll(einkaufsListe.getIdData1(buttonID));
+                        for(int i = 0; i < resultID.length(); i++){
+                            try {
+                                JSONObject object = resultID.getJSONObject(i);
+                                //final int iD = object.getInt("id");
+                                String name = object.getString("name");
+                                String amount = object.getString("menge");
+                                addItemVorrat(null, name, amount,null,null);
+
+                            }catch (JSONException e){
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
+
 
                 neu.addView(neuLL);
                 tableLayout.addView(neu);
@@ -183,6 +206,41 @@ public class EinkaufsListe extends AppCompatActivity {
         }
 
     }
+
+
+    public void addItemVorrat(@Nullable Long barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock){
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(DBHelper.GroceryEntry.COLUMN_BARCODE, barcode);
+        cv.put(DBHelper.GroceryEntry.COLUMN_NAME, name);
+        //amount nicht vorher reinmachen, da sonst doppelter betrag wegen updateDB
+        cv.put(DBHelper.GroceryEntry.COLUMN_MHD, mhd);
+        cv.put(DBHelper.GroceryEntry.COLUMN_RESTOCK, restock);
+
+        if (!checkNameInEinkaufsListe2(name)){
+            cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount);
+            database.insert(DBHelper.GroceryEntry.TABLE_NAME2, null,cv);
+        }
+        else{
+            JSONArray resultID = getProductAll(einkaufsListe.getNameData2(name));
+            for(int i = 0; i < resultID.length(); i++){
+                try {
+                    JSONObject object = resultID.getJSONObject(i);
+                    final int iD = object.getInt("id");
+                    float menge = Float.parseFloat(object.getString("menge"));
+                    float ergebnis = menge+ Float.parseFloat(amount);
+                    cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, Float.toString(ergebnis));
+                    updateItemDB2(iD, cv);
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
 
     public void addItemEinkaufsliste(@Nullable Long barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock){
 
@@ -198,39 +256,18 @@ public class EinkaufsListe extends AppCompatActivity {
             cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount);
             database.insert(DBHelper.GroceryEntry.TABLE_NAME1, null, cv);
         }
-        else{
-            JSONArray resultID = getProductAll(einkaufsListe.getIdData1(name));
-            for(int i = 0; i < resultID.length(); i++){
+        else {
+            JSONArray resultID = getProductAll(einkaufsListe.getNameData1(name));
+            for (int i = 0; i < resultID.length(); i++) {
                 try {
                     JSONObject object = resultID.getJSONObject(i);
                     final int iD = object.getInt("id");
-                    int menge = Integer.parseInt(object.getString("menge"));
-                    float ergebnis = (float) menge+ Float.parseFloat(amount);
+                    float menge = Float.parseFloat(object.getString("menge"));
+                    float ergebnis = menge + Float.parseFloat(amount);
                     cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, Float.toString(ergebnis));
                     updateItemDB1(iD, cv);
 
-                }catch (JSONException e){
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        if (!checkNameInEinkaufsListe2(name)){
-            cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount);
-            database.insert(DBHelper.GroceryEntry.TABLE_NAME2, null,cv);
-        }
-        else{
-            JSONArray resultID = getProductAll(einkaufsListe.getIdData2(name));
-            for(int i = 0; i < resultID.length(); i++){
-                try {
-                    JSONObject object = resultID.getJSONObject(i);
-                    final int iD = object.getInt("id");
-                    int menge = Integer.parseInt(object.getString("menge"));
-                    float ergebnis = (float) menge+ Float.parseFloat(amount);
-                    cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, Float.toString(ergebnis));
-                    updateItemDB2(iD, cv);
-
-                }catch (JSONException e){
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
