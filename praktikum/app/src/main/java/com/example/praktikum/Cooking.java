@@ -35,7 +35,7 @@ public class Cooking extends AppCompatActivity {
             }
         });
 
-        stockButton = findViewById(R.id.buttonCooking);
+        stockButton = findViewById(R.id.buttonStock);
         stockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
