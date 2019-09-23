@@ -21,4 +21,6 @@
     <string name="instructions"><u>Instructions</u></string>
     <string name="back">Back</string>
     <string name="category"><u>Category</u></string>
+    <string name="name_title"><u>Name</u></string>
+    <string name="id_title"><u>ID</u></string>
 </resources>

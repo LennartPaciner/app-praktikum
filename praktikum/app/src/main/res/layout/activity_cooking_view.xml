@@ -69,7 +69,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/concert_one"
-                            android:text="Name"
+                            android:text="@string/name_title"
                             android:textSize="18sp"
                             tools:layout_editor_absoluteX="-125dp"
                             tools:layout_editor_absoluteY="25dp" />
@@ -103,7 +103,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/concert_one"
-                            android:text="ID"
+                            android:text="@string/id_title"
                             android:textSize="18sp"
                             tools:layout_editor_absoluteX="85dp"
                             tools:layout_editor_absoluteY="25dp" />

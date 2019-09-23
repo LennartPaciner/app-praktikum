@@ -54,7 +54,7 @@ public class StockActivity extends AppCompatActivity {
         recipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCookingView();
+                openCookingRecipe();
             }
         });
 
@@ -62,7 +62,7 @@ public class StockActivity extends AppCompatActivity {
         cookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCooking();
+                openCookingView();
             }
         });
 
@@ -172,13 +172,17 @@ public class StockActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openCooking(){
-        Intent intent = new Intent(this, Cooking.class);
+    public void openCookingRecipe(){
+        Intent intent = new Intent(this, CookingRecipe.class);
         startActivity(intent);
     }
 
     public void openCookingView(){
+<<<<<<< HEAD
+        Intent intent = new Intent(this, Cooking.class);
+=======
         Intent intent = new Intent(this, CookingView.class);
+>>>>>>> 9d9a256d0c60d100f38c8be60fd86c23182e937d
         startActivity(intent);
     }
 

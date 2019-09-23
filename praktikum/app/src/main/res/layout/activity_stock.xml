@@ -42,11 +42,13 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
+                    android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <FrameLayout
+                        android:id="@+id/frameLayoutProduct"
                         android:layout_width="100dp"
                         android:layout_height="match_parent">
 
