@@ -10,6 +10,9 @@ import android.widget.Button;
 public class StockActivity extends AppCompatActivity {
     private Button einkaufButton;
     private Button homeButton;
+    private Button recipeButton;
+    private Button cookingButton;
+    private Button addProduct;
 
 
 
@@ -27,6 +30,22 @@ public class StockActivity extends AppCompatActivity {
             }
         });
 
+        recipeButton = findViewById(R.id.buttonRecipe);
+        recipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCookingRecipe();
+            }
+        });
+
+        cookingButton = findViewById(R.id.buttonCooking);
+        cookingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCookingView();
+            }
+        });
+
 
         homeButton = findViewById(R.id.buttonHome);
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -35,11 +54,31 @@ public class StockActivity extends AppCompatActivity {
                 openMainPage();
             }
         });
+
+        addProduct = findViewById(R.id.buttonAddGrocery);
+        addProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //should open window for adding items to Stock
+            }
+        });
     }
+
+
 
 
     public void openEinkaufsListe(){
         Intent intent = new Intent(this, EinkaufsListe.class);
+        startActivity(intent);
+    }
+
+    public void openCookingRecipe(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void openCookingView(){
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
