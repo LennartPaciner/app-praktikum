@@ -13,12 +13,11 @@
 
     <EditText
         android:id="@+id/edit2"
-        android:paddingTop="30dp"
-        android:hint="Menge in Gramm"
-        android:inputType="numberDecimal|numberSigned"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:hint="@string/amount_in_gram"
+        android:inputType="numberDecimal|numberSigned"
+        android:paddingTop="30dp">
 
     </EditText>
 

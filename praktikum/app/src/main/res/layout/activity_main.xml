@@ -27,7 +27,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="364dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/toggleLanguage"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
@@ -39,6 +39,7 @@
         android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,20 +49,17 @@
         android:id="@+id/ersterbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
-        >
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/groceryTextView"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="@string/my_grocery_list"
@@ -73,7 +71,6 @@
             android:layout_height="150dp"
             android:background="@drawable/shopping_basket"
             android:visibility="visible"
-
 
 
             />
@@ -88,13 +85,13 @@
         android:id="@+id/zweiterbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/ersterbutton"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/textView"
+        android:layout_alignRight="@+id/ersterbutton"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
 
-        >
+        android:orientation="vertical">
 
 
         <TextView
@@ -102,12 +99,11 @@
             android:layout_width="150dp"
 
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="@string/my_stock"
             android:textStyle="bold" />
+
         <Button
 
             android:id="@+id/buttonStock"
@@ -121,27 +117,24 @@
     </LinearLayout>
 
 
-
     <LinearLayout
         android:id="@+id/dritterbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/buttonInformation"
         android:layout_below="@+id/ersterbutton"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp"
+        android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
-        >
+        android:gravity="center"
+        android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/cookingTextView"
-            android:layout_width="150dp"
-
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
+
             android:gravity="center"
             android:text="@string/cooking"
             android:textStyle="bold" />
@@ -164,32 +157,30 @@
         android:layout_height="wrap_content" />
 
 
-
-
     <LinearLayout
         android:id="@+id/vierterbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/ersterbutton"
-        android:orientation="vertical"
-
-        android:layout_alignParentRight="true"
+        android:layout_above="@+id/buttonInformation"
         android:layout_below="@+id/zweiterbutton"
-        android:layout_marginTop="30dp"
-        >
+
+        android:layout_alignRight="@+id/ersterbutton"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/recipeTextView"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="@string/recipes"
             android:textStyle="bold" />
+
         <Button
             android:id="@+id/buttonRecipe"
             android:layout_width="150dp"

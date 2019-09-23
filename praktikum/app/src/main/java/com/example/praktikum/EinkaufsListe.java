@@ -96,21 +96,22 @@ public class EinkaufsListe extends AppCompatActivity {
     }
 
     public void createEinkaufsliste(){
-        JSONArray arr = getProductAll(einkaufsListe.getAllData());
+        JSONArray arr = getProductAll(einkaufsListe.getAllData1());
         for(int i = 0; i < arr.length(); i++){
             try{
                 JSONObject object = arr.getJSONObject(i);
                 String name = object.getString("name");
-                int amount = object.getInt("menge");
+                String amount = object.getString("menge");
+                final int iD = object.getInt("id");
 
-                TableLayout tableLayout = findViewById(R.id.tableLayout1);
+                final TableLayout tableLayout = findViewById(R.id.tableLayout1);
                 TableRow rowLayout = findViewById(R.id.rowLayout);
                 LinearLayout linearLayout = findViewById(R.id.linearLayout2);
                 FrameLayout frameLayout = findViewById(R.id.frameLayoutProduct);
                 TextView columnLayout = findViewById(R.id.columnLayout);
 
-                TableRow neu = new TableRow(this);
-                LinearLayout neuLL = new LinearLayout(this);
+                final TableRow neu = new TableRow(this);
+                final LinearLayout neuLL = new LinearLayout(this);
                 neuLL.setLayoutParams(linearLayout.getLayoutParams());
 
                 // add name TV
@@ -133,12 +134,21 @@ public class EinkaufsListe extends AppCompatActivity {
 
 
                 // add amount checkBox
-                FrameLayout checkBoxFL = new FrameLayout(this);
-                CheckBox checkBoxTV = new CheckBox(this);
-                checkBoxFL.setLayoutParams(frameLayout.getLayoutParams());
-                checkBoxTV.setLayoutParams(columnLayout.getLayoutParams());
-                checkBoxFL.addView(checkBoxTV);
-                neuLL.addView(checkBoxFL);
+                FrameLayout deleteFL = new FrameLayout(this);
+                Button deleteListe = new Button(this);
+                deleteFL.setLayoutParams(frameLayout.getLayoutParams());
+                deleteListe.setLayoutParams(columnLayout.getLayoutParams());
+                deleteListe.setText("X");
+                deleteFL.addView(deleteListe);
+                neuLL.addView(deleteFL);
+                deleteListe.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        removeItemDB(iD);
+                        neu.removeView(neuLL);
+                        tableLayout.removeView(neu);
+                    }
+                });
 
                 // add qr
                 FrameLayout qrFL = new FrameLayout(this);
@@ -163,23 +173,46 @@ public class EinkaufsListe extends AppCompatActivity {
     public void addItemEinkaufsliste(@Nullable Long barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock){
 
         ContentValues cv = new ContentValues();
-        //cv.put(DBHelper.GroceryEntry.COLUMN_ID,1);
+
         cv.put(DBHelper.GroceryEntry.COLUMN_BARCODE, barcode);
         cv.put(DBHelper.GroceryEntry.COLUMN_NAME, name);
         cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount);
         cv.put(DBHelper.GroceryEntry.COLUMN_MHD, mhd);
         cv.put(DBHelper.GroceryEntry.COLUMN_RESTOCK, restock);
+
         database.insert(DBHelper.GroceryEntry.TABLE_NAME1, null, cv);
 
+        if (!checkNameInEinkaufsListe2(name)){
+            database.insert(DBHelper.GroceryEntry.TABLE_NAME2, null,cv);
+        }
+        else{
+            JSONArray resultID = getProductAll(einkaufsListe.getIdData2(name));
+            for(int i = 0; i < resultID.length(); i++){
+                try {
+                    JSONObject object = resultID.getJSONObject(i);
+                    Toast.makeText(this, object.toString(), Toast.LENGTH_LONG).show();
+                    final int iD = object.getInt("id");
+                    int menge = Integer.parseInt(object.getString("menge"));
+                    int ergebnis = menge+ Integer.parseInt(amount);
+                    String str = String.valueOf(ergebnis);
+                    cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, str);
+                    updateItemDB(iD, cv);
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
-    public void removeItemDB(long id){
-        database.delete(DBHelper.GroceryEntry.TABLE_NAME1, DBHelper.GroceryEntry._ID + "=" + id, null);
+    public void removeItemDB(int id){
+        database.delete(DBHelper.GroceryEntry.TABLE_NAME1, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
 
     }
 
-    public void updateItemDB(long id, ContentValues content){
-        database.update(DBHelper.GroceryEntry.TABLE_NAME1, content, DBHelper.GroceryEntry._ID + "=" + id, null);
+    public void updateItemDB(int id, ContentValues content){
+        database.update(DBHelper.GroceryEntry.TABLE_NAME2, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
         //ContentValues con = new ContentValues();
         //con.put(DBHelper.GroceryEntry.COLUMN_NAME, "nudel");
         //con.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, 10);
@@ -188,7 +221,7 @@ public class EinkaufsListe extends AppCompatActivity {
 
     public JSONArray getProductAll(Cursor result) {
         JSONArray resultSet = new JSONArray();
-        StringBuffer buffer = new StringBuffer();
+
         if (result != null && result.getCount() > 0) {
             while (result.moveToNext()) {
                 try {
@@ -219,25 +252,29 @@ public class EinkaufsListe extends AppCompatActivity {
         final EditText input2 =  textEntryView.findViewById(R.id.edit2);
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Produktname und Menge:").setView(textEntryView).setPositiveButton("Save",
+        alert.setTitle(R.string.product_and_amount).setView(textEntryView).setPositiveButton(R.string.save,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int whichButton) {
-                        if(!checkNameInEinkaufsListe(input1.toString())){
+                        if(!checkNameInEinkaufsListe1(input1.toString())){
                             if(input2.getText().toString().equals("")){
                                 addItemEinkaufsliste(null, input1.getText().toString(),null , null, null);
+
+
                                 Intent intentEL = new Intent(EinkaufsListe.this, EinkaufsListe.class);
                                 startActivity(intentEL);
                             }else{
                                 float input = Float.parseFloat(input2.getText().toString());
                                 String amount = df2.format(input);
                                 addItemEinkaufsliste(null, input1.getText().toString(),amount , null, null);
+
+
                                 Intent intentEL = new Intent(EinkaufsListe.this, EinkaufsListe.class);
                                 startActivity(intentEL);
                             }
                         }
                     }
-                }).setNegativeButton("Cancel",
+                }).setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int whichButton) {
@@ -253,8 +290,19 @@ public class EinkaufsListe extends AppCompatActivity {
         return bd.floatValue();
     }
 
-    public boolean checkNameInEinkaufsListe(String Name){
+    public boolean checkNameInEinkaufsListe1(String Name){
         String sql = "SELECT * FROM " + DBHelper.GroceryEntry.TABLE_NAME1 + " WHERE Name = " + "'" + Name + "'";
+
+        Cursor mCursor = database.rawQuery(sql, null);
+        if (mCursor.getCount() > 0) {
+            return true;
+        }
+        mCursor.close();
+        return false;
+    }
+
+    public boolean checkNameInEinkaufsListe2(String Name){
+        String sql = "SELECT * FROM " + DBHelper.GroceryEntry.TABLE_NAME2 + " WHERE Name = " + "'" + Name + "'";
 
         Cursor mCursor = database.rawQuery(sql, null);
         if (mCursor.getCount() > 0) {
