@@ -19,7 +19,7 @@ public class Cooking extends AppCompatActivity {
         setContentView(R.layout.activity_cooking);
 
 
-        einkaufButton = findViewById(R.id.buttonCheckList);
+        einkaufButton = findViewById(R.id.buttonCooking_CheckList);
         einkaufButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,7 +27,7 @@ public class Cooking extends AppCompatActivity {
             }
         });
 
-        recipeButton = findViewById(R.id.buttonRecipe);
+        recipeButton = findViewById(R.id.buttonCooking_Recipe);
         recipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,7 +35,7 @@ public class Cooking extends AppCompatActivity {
             }
         });
 
-        stockButton = findViewById(R.id.buttonStock);
+        stockButton = findViewById(R.id.buttonCooking_Stock);
         stockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

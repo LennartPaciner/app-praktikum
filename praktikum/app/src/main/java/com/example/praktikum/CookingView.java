@@ -59,6 +59,42 @@ public class CookingView extends AppCompatActivity {
         });
 
 
+
+
+
+        Button einkaufButton = findViewById(R.id.buttonRecipe_CheckList);
+        einkaufButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEinkaufsListe();
+            }
+        });
+
+
+        Button homeButton = findViewById(R.id.buttonHome);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMainActivity();
+            }
+        });
+
+
+        Button stockButton = findViewById(R.id.buttonRecipe_Stock);
+        stockButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openStockActivity();
+            }
+        });
+
+        Button cookingButton = findViewById(R.id.buttonRecipe_Cooking);
+        cookingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCooking();
+            }
+        });
     }
 
     public void openDialog() {
@@ -272,5 +308,26 @@ public class CookingView extends AppCompatActivity {
             e.printStackTrace();
         }
         return "Fehler";
+    }
+
+
+    public void openEinkaufsListe(){
+        Intent intent = new Intent(this, EinkaufsListe.class);
+        startActivity(intent);
+    }
+
+    public void openCooking(){
+        Intent intent = new Intent(this, Cooking.class);
+        startActivity(intent);
+    }
+
+    public void openStockActivity(){
+        Intent intent = new Intent(this, StockActivity.class);
+        startActivity(intent);
+    }
+
+    public void openMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

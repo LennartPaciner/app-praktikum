@@ -29,23 +29,14 @@ public class MainActivity extends AppCompatActivity {
     private ToggleButton languageButton;
     public String appLanguage;
     private Button infoButton;
- //   private Thread myThread;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    /*    myThread = new Thread(){
-            @Override
-            public void run() {
-                Intent intent = new Intent(getApplicationContext(), SplashScreenActivity.class);
-                startActivity(intent);
-            }
-        };
-        myThread.start();
-*/
+
         super.onCreate(savedInstanceState);
 
-        defaultLanguage();
+        languageSetting();
 
         setContentView(R.layout.activity_main);
 
@@ -70,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        recipeButton = findViewById(R.id.buttonCooking);
+        recipeButton = findViewById(R.id.buttonRecipe);
         recipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCooking();
+                openCookingView();
             }
         });
 
@@ -87,16 +78,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        recipeButton = findViewById(R.id.buttonRecipe);
-        recipeButton.setOnClickListener(new View.OnClickListener() {
+        cookingButton = findViewById(R.id.buttonCooking);
+        cookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCookingView();
+                openCooking();
             }
         });
-
-       
     }
+
 
     public void openEinkaufsListe(){
         setAppLanguage(appLanguage);
@@ -112,8 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openStockActivity(){
         setAppLanguage(appLanguage);
-   //     System.out.println("Locale.getDefault().getLanguage():     "+Locale.getDefault().getLanguage());
-   //     System.out.println("getResources().getConfiguration().locale:     "+getResources().getConfiguration().locale);
+ 
         Intent intent = new Intent(this, StockActivity.class);
         startActivity(intent);
     }
@@ -131,13 +120,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void defaultLanguage(){
-        if (getIntent().getStringExtra("language") != null){
-            appLanguage = getIntent().getStringExtra("language");
+    private void languageSetting(){
+        if (getIntent().getStringExtra("startingLanguage") != null) {
+            appLanguage = getResources().getConfiguration().locale.toString();
+            getIntent().removeExtra("startingLanguage");
         }else{
-            appLanguage = getResources().getConfiguration().locale.toString();     // returns active language code
+            if (getIntent().getStringExtra("language") != null){
+                appLanguage = getIntent().getStringExtra("language");
+            }else{
+                appLanguage = getResources().getConfiguration().locale.toString();     // returns active language code
+            }
+            setAppLanguage(appLanguage);
         }
-        setAppLanguage(appLanguage);
     }
 
 

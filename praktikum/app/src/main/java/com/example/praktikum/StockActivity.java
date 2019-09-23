@@ -42,7 +42,7 @@ public class StockActivity extends AppCompatActivity {
         createVorratliste(einkaufsListe2.getProductAll(einkaufsListeDB.getAllData2()));
 
 
-        einkaufButton = findViewById(R.id.buttonCheckList);
+        einkaufButton = findViewById(R.id.buttonStock_CheckList);
         einkaufButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +50,7 @@ public class StockActivity extends AppCompatActivity {
             }
         });
 
-        recipeButton = findViewById(R.id.buttonRecipe);
+        recipeButton = findViewById(R.id.buttonStock_Recipe);
         recipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +58,7 @@ public class StockActivity extends AppCompatActivity {
             }
         });
 
-        cookingButton = findViewById(R.id.buttonCooking);
+        cookingButton = findViewById(R.id.buttonStock_Cooking);
         cookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
