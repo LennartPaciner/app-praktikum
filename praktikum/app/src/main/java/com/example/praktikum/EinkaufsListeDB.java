@@ -15,7 +15,7 @@ import java.sql.Date;
 import static java.sql.Types.BIT;
 
 public class EinkaufsListeDB extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "DB12.db";
+    public static final String DATABASE_NAME = "DB17.db";
     public static final int DATABASE_VERSION = 1;
 
     public EinkaufsListeDB(Context context) {
@@ -64,6 +64,11 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
     public Cursor getIdData2(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + GroceryEntry.TABLE_NAME2 + " WHERE Name = " + "'" + name + "'", null);
+    }
+
+    public Cursor getIdData1(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + GroceryEntry.TABLE_NAME1 + " WHERE Name = " + "'" + name + "'", null);
     }
 
 }
