@@ -16,7 +16,7 @@ public class CookingRecipe extends AppCompatActivity {
 
     private TextView textView;
     private ImageView imageView;
-    private Button button;
+    private TextView textView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,23 +26,17 @@ public class CookingRecipe extends AppCompatActivity {
 
         textView = findViewById(R.id.textRezept);
         imageView = findViewById(R.id.imageRezept);
-        button = findViewById(R.id.imageButton);
+        textView2 = findViewById(R.id.imageText);
 
         Intent intent = getIntent();
         String descr = intent.getStringExtra(CookingView.EXTRA_DESC);
         String image = intent.getStringExtra(CookingView.EXTRA_IMAGE);
+        String meal = intent.getStringExtra(CookingView.EXTRA_MEAL);
 
         loadImage(image);
         textView.setText(descr);
+        textView2.setText(meal);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Müssen noch UI speichern ansonsten löscht er alles. Oder wir lassen den button weg und gehen übers handy zurück, das funktioniert.
-                //goBack();
-
-            }
-        });
     }
 
     public void loadImage(String url){
@@ -59,9 +53,4 @@ public class CookingRecipe extends AppCompatActivity {
         });
     }
 
-    //public void goBack(){
-
-      //  Intent intent = new Intent(this, CookingView.class);
-        //startActivity(intent);
-    //}
 }
