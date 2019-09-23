@@ -92,7 +92,6 @@ public class EinkaufsListe extends AppCompatActivity {
 
     public void increase(){
         amount++;
-
     }
 
     public void createEinkaufsliste(){
