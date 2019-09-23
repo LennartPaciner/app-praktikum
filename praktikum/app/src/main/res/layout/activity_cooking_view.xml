@@ -55,12 +55,14 @@
                     android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <FrameLayout
                         android:id="@+id/frameLayoutProduct"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/columnLayout"
@@ -76,8 +78,9 @@
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/textView3"
@@ -93,8 +96,9 @@
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/textView4"
@@ -110,8 +114,9 @@
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/textView5"

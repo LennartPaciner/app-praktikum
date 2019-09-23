@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private Button stockButton;
     private Button cookingButton;
     private Button recipeButton;
-
     private ToggleButton languageButton;
     public String appLanguage;
     private Button infoButton;
