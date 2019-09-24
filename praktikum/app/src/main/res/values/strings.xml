@@ -23,4 +23,5 @@
     <string name="category"><u>Kategorie</u></string>
     <string name="name_title"><u>Name</u></string>
     <string name="id_title"><u>ID</u></string>
+    <string name="title_activity_barcode">Barcode</string>
 </resources>
