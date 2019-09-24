@@ -83,16 +83,8 @@ public class Cooking extends AppCompatActivity {
                 openStockActivity();
             }
         });
-        add_items();
+
         createCookingView(einkaufsListe2.getProductAll(einkaufsListeDB.getAllData2()));
-
-
-    }
-    public void add_items(){
-        einkaufsListe.addItemVorrat(null,"Test1","12", null, null);
-        einkaufsListe.addItemVorrat(null,"Test2","7", null, null);
-        einkaufsListe.addItemVorrat(null,"Test3","1", null, null);
-        einkaufsListe.addItemVorrat(null,"Test4","14", null, null);
 
     }
 
