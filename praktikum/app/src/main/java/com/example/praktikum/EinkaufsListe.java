@@ -166,29 +166,28 @@ public class EinkaufsListe extends AppCompatActivity {
 
                 // add qr
                 FrameLayout qrFL = new FrameLayout(this);
-                final Button qrBtn = new Button(this);
+                final Button qrBtn = new CheckBox(this);
                 qrFL.setLayoutParams(frameLayout.getLayoutParams());
                 qrBtn.setLayoutParams(columnLayout.getLayoutParams());
-                final int tmp = i+1;
-                qrBtn.setText(String.valueOf(tmp));
+                final int tmp = i;
                 qrFL.addView(qrBtn);
                 neuLL.addView(qrFL);
                 qrBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int buttonID = Integer.parseInt(qrBtn.getText().toString());
-
-
                         JSONArray resultID = getProductAll(einkaufsListe.getAllData1());
+                        if(((CheckBox) qrBtn).isChecked()){
                             try {
-                                JSONObject object = resultID.getJSONObject(tmp-1);
+                                JSONObject object = resultID.getJSONObject(tmp);
                                 String name = object.getString("name");
                                 String amount = object.getString("menge");
                                 addItemVorrat(null, name, amount,null,null);
-
+                                int id = object.getInt("id");
+                                removeItemDB(id);
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }
+                        }
                     }
                 });
 
@@ -326,8 +325,6 @@ public class EinkaufsListe extends AppCompatActivity {
                                         int whichButton) {
                             if(input2.getText().toString().equals("")){
                                 addItemEinkaufsliste(null, input1.getText().toString(),null , null, null);
-
-
                                 Intent intentEL = new Intent(EinkaufsListe.this, EinkaufsListe.class);
                                 overridePendingTransition(0, 0);
                                 startActivity(intentEL);
