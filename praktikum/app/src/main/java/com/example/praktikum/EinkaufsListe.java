@@ -285,7 +285,6 @@ public class EinkaufsListe extends AppCompatActivity {
 
     public void updateItemDB2(int id, ContentValues content){
         database.update(DBHelper.GroceryEntry.TABLE_NAME2, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
-        
     }
 
     public JSONArray getProductAll(Cursor result) {
@@ -352,6 +351,13 @@ public class EinkaufsListe extends AppCompatActivity {
                         return;
                     }
                 });
+        alert.setNeutralButton("Barcode", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(EinkaufsListe.this, Barcode.class);
+                startActivity(intent);
+            }
+        });
         alert.show();
     }
 
