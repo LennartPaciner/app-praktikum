@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -155,7 +157,7 @@ public class Cooking extends AppCompatActivity {
                 Button decrease_B = new Button(this);
                 decrease_FL.setLayoutParams(FL_Decrease.getLayoutParams());
                 decrease_B.setLayoutParams(TV_Decrease.getLayoutParams());
-                decrease_B.setText("+");
+                decrease_B.setBackgroundResource(R.drawable.add);
                 decrease_FL.addView(decrease_B);
                 new_LinearLayout.addView(decrease_FL);
                 decrease_B.setOnClickListener(new View.OnClickListener() {
