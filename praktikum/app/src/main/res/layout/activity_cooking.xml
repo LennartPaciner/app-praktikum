@@ -15,13 +15,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/SView"
+        app:layout_constraintBottom_toTopOf="@+id/SView_Cooking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/SView"
+        android:id="@+id/SView_Cooking"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
@@ -32,28 +32,30 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TableLayout
-            android:id="@+id/tableLayout1"
+            android:id="@+id/tableLayout_Cooking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TableRow
-                android:id="@+id/rowLayout"
+                android:id="@+id/rowLayout_Cooking"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
                 <LinearLayout
+                    android:id="@+id/LL_Cooking"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <FrameLayout
-                        android:layout_width="205dp"
+                        android:id="@+id/FL_Cooking_Product"
+                        android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/columnLayout"
+                            android:id="@+id/columnLayout_Cooking_Product"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -63,17 +65,47 @@
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="205dp"
+                        android:id="@+id/FL_Cooking_increase"
+                        android:layout_width="50dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/textView3"
+                            android:id="@+id/TV_Cooking_increase"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="18sp" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/FL_Cooking_Amount"
+                        android:layout_width="160dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/columnLayout_Cooking_Amount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/amount"
+                            android:textSize="18sp"
+                            android:inputType="number"/>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/FL_Cooking_decrease"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/TV_Cooking_decrease"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:textSize="18sp" />
                     </FrameLayout>
 
@@ -102,7 +134,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SView">
+        app:layout_constraintTop_toBottomOf="@+id/SView_Cooking">
 
         <FrameLayout
             android:layout_width="100dp"
@@ -152,7 +184,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/home"
-        app:layout_constraintBottom_toTopOf="@+id/SView"
+        app:layout_constraintBottom_toTopOf="@+id/SView_Cooking"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <Button
@@ -162,7 +194,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/add_1"
-        app:layout_constraintBottom_toTopOf="@+id/SView"
+        app:layout_constraintBottom_toTopOf="@+id/SView_Cooking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
