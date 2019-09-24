@@ -63,7 +63,34 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
     public Cursor getAllData2(){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * from " + GroceryEntry.TABLE_NAME2,null);
+    }
 
+    public JSONArray getStockDataJson(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor result = db.rawQuery("SELECT * from " + GroceryEntry.TABLE_NAME2,null);
+
+        JSONArray resultSet = new JSONArray();
+
+        if (result != null && result.getCount() > 0) {
+            while (result.moveToNext()) {
+                try {
+                    JSONObject object = new JSONObject();
+                    object.put("id", result.getInt(0));
+                    object.put("barcode", result.getInt(1));
+                    object.put("name", result.getString(2));
+                    object.put("menge", result.getString(3));
+                    object.put("mhd", result.getString(4));
+                    object.put("restock", result.getInt(5));
+                    resultSet.put(object);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            return resultSet;
+        }
+        return resultSet;
     }
 
     public Cursor getNameData2(String name){

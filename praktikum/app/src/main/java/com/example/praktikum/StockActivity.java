@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +29,7 @@ public class StockActivity extends AppCompatActivity {
     private SQLiteDatabase database;
 
     private EinkaufsListe einkaufsListe;
+    public EinkaufsListeDB einkaufsListeDB;
 
 
 
@@ -35,7 +38,7 @@ public class StockActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock);
 
-        EinkaufsListeDB einkaufsListeDB = new EinkaufsListeDB(this);
+        einkaufsListeDB = new EinkaufsListeDB(this);
         EinkaufsListe einkaufsListe2 = new EinkaufsListe();
         database = einkaufsListeDB.getWritableDatabase();
         einkaufsListe = einkaufsListe2;
@@ -81,7 +84,7 @@ public class StockActivity extends AppCompatActivity {
         JSONArray arr = array;
         for(int i = 0; i < arr.length(); i++){
             try{
-                JSONObject object = arr.getJSONObject(i);
+                final JSONObject object = arr.getJSONObject(i);
                 String name = object.getString("name");
                 String amount = object.getString("menge");
                 final int iD = object.getInt("id");
@@ -134,16 +137,30 @@ public class StockActivity extends AppCompatActivity {
 
                 // add qr
                 FrameLayout qrFL = new FrameLayout(this);
-                Button qrBtn = new Button(this);
+                final Button qrBtn = new CheckBox(this);
                 qrFL.setLayoutParams(frameLayout.getLayoutParams());
                 qrBtn.setLayoutParams(columnLayout.getLayoutParams());
-                qrBtn.setText("-");
                 qrFL.addView(qrBtn);
+                final int tmp = i;
+
                 neuLL.addView(qrFL);
                 qrBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(((CheckBox) qrBtn).isChecked()){
+                            try {
+                                JSONArray jsonArray = einkaufsListeDB.getStockDataJson();
+                                JSONObject object1 = jsonArray.getJSONObject(tmp);
+                                String name = object1.getString("name");
+                                String menge = object1.getString("menge");
+                                einkaufsListeDB.addItemEListe(null, name, menge, null, null);
 
+                                //Toast.makeText(StockActivity.this, object1.toString(), Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                Log.e("Einkaufsliste", e.getMessage());
+                            }
+
+                        }
                     }
                 });
 
