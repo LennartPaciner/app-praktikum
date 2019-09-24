@@ -169,7 +169,7 @@ public class EinkaufsListe extends AppCompatActivity {
                 final Button qrBtn = new Button(this);
                 qrFL.setLayoutParams(frameLayout.getLayoutParams());
                 qrBtn.setLayoutParams(columnLayout.getLayoutParams());
-                int tmp = i+1;
+                final int tmp = i+1;
                 qrBtn.setText(String.valueOf(tmp));
                 qrFL.addView(qrBtn);
                 neuLL.addView(qrFL);
@@ -179,11 +179,9 @@ public class EinkaufsListe extends AppCompatActivity {
                         int buttonID = Integer.parseInt(qrBtn.getText().toString());
 
 
-                        JSONArray resultID = getProductAll(einkaufsListe.getIdData1(buttonID));
-                        for(int i = 0; i < resultID.length(); i++){
+                        JSONArray resultID = getProductAll(einkaufsListe.getAllData1());
                             try {
-                                JSONObject object = resultID.getJSONObject(i);
-                                //final int iD = object.getInt("id");
+                                JSONObject object = resultID.getJSONObject(tmp-1);
                                 String name = object.getString("name");
                                 String amount = object.getString("menge");
                                 addItemVorrat(null, name, amount,null,null);
@@ -191,7 +189,6 @@ public class EinkaufsListe extends AppCompatActivity {
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }
-                        }
                     }
                 });
 
