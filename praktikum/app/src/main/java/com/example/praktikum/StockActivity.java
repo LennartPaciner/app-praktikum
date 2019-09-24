@@ -75,13 +75,6 @@ public class StockActivity extends AppCompatActivity {
             }
         });
 
-        addProduct = findViewById(R.id.buttonAddGrocery);
-        addProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //should open window for adding items to Stock
-            }
-        });
     }
 
     public void createVorratliste(JSONArray array){
@@ -117,7 +110,7 @@ public class StockActivity extends AppCompatActivity {
                 TextView amountTV = new TextView(this);
                 amountFL.setLayoutParams(frameLayout.getLayoutParams());
                 amountTV.setLayoutParams(columnLayout.getLayoutParams());
-                amountTV.setText(amount + " gramm");
+                amountTV.setText(amount);
                 amountFL.addView(amountTV);
                 neuLL.addView(amountFL);
 
@@ -144,9 +137,15 @@ public class StockActivity extends AppCompatActivity {
                 Button qrBtn = new Button(this);
                 qrFL.setLayoutParams(frameLayout.getLayoutParams());
                 qrBtn.setLayoutParams(columnLayout.getLayoutParams());
-                qrBtn.setText("QR");
+                qrBtn.setText("-");
                 qrFL.addView(qrBtn);
                 neuLL.addView(qrFL);
+                qrBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
 
                 neu.addView(neuLL);
                 tableLayout.addView(neu);

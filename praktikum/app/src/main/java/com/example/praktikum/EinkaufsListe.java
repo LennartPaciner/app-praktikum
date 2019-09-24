@@ -142,7 +142,7 @@ public class EinkaufsListe extends AppCompatActivity {
                 TextView amountTV = new TextView(this);
                 amountFL.setLayoutParams(frameLayout.getLayoutParams());
                 amountTV.setLayoutParams(columnLayout.getLayoutParams());
-                amountTV.setText(amount + " gramm");
+                amountTV.setText(amount);
                 amountFL.addView(amountTV);
                 neuLL.addView(amountFL);
 
