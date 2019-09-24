@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -67,11 +66,6 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
 
     }
 
-    public Cursor getIdData2(String name){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + GroceryEntry.TABLE_NAME2 + " WHERE Name = " + "'" + name + "'", null);
-    }
-
     public Cursor getNameData2(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + GroceryEntry.TABLE_NAME2 + " WHERE Name = " + "'" + name + "'", null);
@@ -80,6 +74,11 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
     public Cursor getNameData1(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + GroceryEntry.TABLE_NAME1 + " WHERE Name = " + "'" + name + "'", null);
+    }
+
+    public Cursor getIdData1(int ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + GroceryEntry.TABLE_NAME1 + " WHERE id = " + "'" + ID + "'", null);
     }
 
     public void addItemEListe(@Nullable String barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock) {

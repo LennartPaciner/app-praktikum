@@ -12,6 +12,7 @@ public class Cooking extends AppCompatActivity {
     private Button recipeButton;
     private Button stockButton;
     private Button homeButton;
+    private Button addVorrat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,16 @@ public class Cooking extends AppCompatActivity {
                 openMainPage();
             }
         });
+
+        addVorrat = findViewById(R.id.buttonAddGrocery);
+        addVorrat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openStockActivity();
+            }
+        });
+
+
 
     }
 

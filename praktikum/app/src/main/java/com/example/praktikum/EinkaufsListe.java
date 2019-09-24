@@ -142,7 +142,7 @@ public class EinkaufsListe extends AppCompatActivity {
                 TextView amountTV = new TextView(this);
                 amountFL.setLayoutParams(frameLayout.getLayoutParams());
                 amountTV.setLayoutParams(columnLayout.getLayoutParams());
-                amountTV.setText(amount + " gramm");
+                amountTV.setText(amount);
                 amountFL.addView(amountTV);
                 neuLL.addView(amountFL);
 
@@ -166,12 +166,32 @@ public class EinkaufsListe extends AppCompatActivity {
 
                 // add qr
                 FrameLayout qrFL = new FrameLayout(this);
-                Button qrBtn = new Button(this);
+                final Button qrBtn = new Button(this);
                 qrFL.setLayoutParams(frameLayout.getLayoutParams());
                 qrBtn.setLayoutParams(columnLayout.getLayoutParams());
-                qrBtn.setText("QR");
+                final int tmp = i+1;
+                qrBtn.setText(String.valueOf(tmp));
                 qrFL.addView(qrBtn);
                 neuLL.addView(qrFL);
+                qrBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int buttonID = Integer.parseInt(qrBtn.getText().toString());
+
+
+                        JSONArray resultID = getProductAll(einkaufsListe.getAllData1());
+                            try {
+                                JSONObject object = resultID.getJSONObject(tmp-1);
+                                String name = object.getString("name");
+                                String amount = object.getString("menge");
+                                addItemVorrat(null, name, amount,null,null);
+
+                            }catch (JSONException e){
+                                e.printStackTrace();
+                            }
+                    }
+                });
+
 
                 neu.addView(neuLL);
                 tableLayout.addView(neu);
@@ -184,36 +204,67 @@ public class EinkaufsListe extends AppCompatActivity {
 
     }
 
+
+    public void addItemVorrat(@Nullable Long barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock){
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(DBHelper.GroceryEntry.COLUMN_BARCODE, barcode);
+        cv.put(DBHelper.GroceryEntry.COLUMN_NAME, name);
+        //amount nicht vorher reinmachen, da sonst doppelter betrag wegen updateDB
+        cv.put(DBHelper.GroceryEntry.COLUMN_MHD, mhd);
+        cv.put(DBHelper.GroceryEntry.COLUMN_RESTOCK, restock);
+
+        if (!checkNameInEinkaufsListe2(name)){
+            cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount);
+            database.insert(DBHelper.GroceryEntry.TABLE_NAME2, null,cv);
+        }
+        else{
+            JSONArray resultID = getProductAll(einkaufsListe.getNameData2(name));
+            for(int i = 0; i < resultID.length(); i++){
+                try {
+                    JSONObject object = resultID.getJSONObject(i);
+                    final int iD = object.getInt("id");
+                    float menge = Float.parseFloat(object.getString("menge"));
+                    float ergebnis = menge+ Float.parseFloat(amount);
+                    cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, Float.toString(ergebnis));
+                    updateItemDB2(iD, cv);
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+
     public void addItemEinkaufsliste(@Nullable Long barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock){
 
         ContentValues cv = new ContentValues();
 
         cv.put(DBHelper.GroceryEntry.COLUMN_BARCODE, barcode);
         cv.put(DBHelper.GroceryEntry.COLUMN_NAME, name);
-        cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount);
+        //amount nicht vorher reinmachen, da sonst doppelter betrag wegen updateDB
         cv.put(DBHelper.GroceryEntry.COLUMN_MHD, mhd);
         cv.put(DBHelper.GroceryEntry.COLUMN_RESTOCK, restock);
 
         if (!checkNameInEinkaufsListe1(name)){
+            cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount);
             database.insert(DBHelper.GroceryEntry.TABLE_NAME1, null, cv);
         }
-        if (!checkNameInEinkaufsListe2(name)){
-            database.insert(DBHelper.GroceryEntry.TABLE_NAME2, null,cv);
-        }
-        else{
-            JSONArray resultID = getProductAll(einkaufsListe.getIdData2(name));
-            for(int i = 0; i < resultID.length(); i++){
+        else {
+            JSONArray resultID = getProductAll(einkaufsListe.getNameData1(name));
+            for (int i = 0; i < resultID.length(); i++) {
                 try {
                     JSONObject object = resultID.getJSONObject(i);
-                    Toast.makeText(this, object.toString(), Toast.LENGTH_LONG).show();
                     final int iD = object.getInt("id");
-                    int menge = Integer.parseInt(object.getString("menge"));
-                    int ergebnis = menge+ Integer.parseInt(amount);
-                    String str = String.valueOf(ergebnis);
-                    cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, str);
-                    updateItemDB(iD, cv);
+                    float menge = Float.parseFloat(object.getString("menge"));
+                    float ergebnis = menge + Float.parseFloat(amount);
+                    cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, Float.toString(ergebnis));
+                    updateItemDB1(iD, cv);
 
-                }catch (JSONException e){
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -226,8 +277,13 @@ public class EinkaufsListe extends AppCompatActivity {
 
     }
 
+    public void updateItemDB1(int id, ContentValues content){
+        database.update(DBHelper.GroceryEntry.TABLE_NAME1, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
 
-    public void updateItemDB(int id, ContentValues content){
+    }
+
+
+    public void updateItemDB2(int id, ContentValues content){
         database.update(DBHelper.GroceryEntry.TABLE_NAME2, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
     }
 

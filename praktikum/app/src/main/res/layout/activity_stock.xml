@@ -50,7 +50,7 @@
 
                     <FrameLayout
                         android:id="@+id/frameLayoutProduct"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
@@ -61,13 +61,15 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/product_name"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            tools:layout_editor_absoluteX="-125dp"
+                            tools:layout_editor_absoluteY="25dp"/>
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        >
 
                         <TextView
                             android:id="@+id/textView3"
@@ -76,13 +78,15 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/amount"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            tools:layout_editor_absoluteX="-20dp"
+                            tools:layout_editor_absoluteY="25dp"/>
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        >
 
                         <TextView
                             android:id="@+id/textView4"
@@ -91,13 +95,15 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:text="@string/best_before_date"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            tools:layout_editor_absoluteX="85dp"
+                            tools:layout_editor_absoluteY="25dp"/>
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        >
 
                         <TextView
                             android:id="@+id/textView5"
@@ -105,7 +111,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:text="@string/restock"
+                            android:fontFamily="@font/concert_one"
+                            android:text="@string/cook"
                             android:textSize="18sp" />
                     </FrameLayout>
 
@@ -116,16 +123,6 @@
         </TableLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/buttonAddGrocery"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/add_1"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/divider"
