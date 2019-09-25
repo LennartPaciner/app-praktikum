@@ -76,7 +76,6 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/concert_one"
-                            android:text="-"
                             android:textSize="18sp"
                             tools:layout_editor_absoluteX="-20dp"
                             tools:layout_editor_absoluteY="25dp" />
@@ -110,7 +109,6 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/concert_one"
-                            android:text="+"
                             android:textSize="18sp" />
                     </FrameLayout>
 
@@ -191,16 +189,6 @@
         android:background="@drawable/home"
         app:layout_constraintBottom_toTopOf="@+id/SView_Cooking"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/buttonAddGrocery"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/add_1"
-        app:layout_constraintBottom_toTopOf="@+id/SView_Cooking"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
