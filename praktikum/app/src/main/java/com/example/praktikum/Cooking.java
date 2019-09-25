@@ -2,8 +2,10 @@ package com.example.praktikum;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,9 +30,6 @@ public class Cooking extends AppCompatActivity {
     private Button addVorrat;
     public EinkaufsListe einkaufsListe;
     public EinkaufsListeDB einkaufsListeDB;
-
-    String amount;
-    EditText amountTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,13 +76,6 @@ public class Cooking extends AppCompatActivity {
             }
         });
 
-        addVorrat = findViewById(R.id.buttonAddGrocery);
-        addVorrat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openStockActivity();
-            }
-        });
         createEinkaufsliste();
     }
 
@@ -93,7 +85,7 @@ public class Cooking extends AppCompatActivity {
             try{
                 JSONObject object = arr.getJSONObject(i);
                 String name = object.getString("name");
-                amount = object.getString("menge");
+                final String amount = object.getString("menge");
                 //Toast.makeText(Cooking.this, name, Toast.LENGTH_LONG).show();
                 final int iD = object.getInt("id");
 
@@ -121,16 +113,34 @@ public class Cooking extends AppCompatActivity {
                 Button deleteListe = new Button(this);
                 deleteFL.setLayoutParams(frameLayout.getLayoutParams());
                 deleteListe.setLayoutParams(columnLayout.getLayoutParams());
-                //Drawable minusBtn = getResources().getDrawable(R.drawable.remove_cooking);
-                //deleteListe.setBackground(minusBtn);
+                deleteListe.setText("-");
+                deleteListe.setTextSize(30);
+                deleteListe.setBackgroundColor(Color.parseColor("#52BCE2"));
                 deleteFL.addView(deleteListe);
+                final int tmp = i;
                 deleteListe.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        float menge = Float.parseFloat(amount);
-                        menge = menge-1;
-                        amount = Float.toString(menge);
-                        setAmountTV(amount);
+                        try {
+                            JSONArray jsonArray = einkaufsListeDB.getStockDataJson();
+                            JSONObject object1 = jsonArray.getJSONObject(tmp);
+                            int ID = object1.getInt("id");
+                            String menge = object1.getString("menge");
+                            float menge2 = Float.parseFloat(menge);
+                            ContentValues contentValues = new ContentValues();
+                            String amount2 = Float.toString(menge2-1);
+                            contentValues.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount2);
+
+                            einkaufsListeDB.updateItemVorrat(ID, contentValues);
+
+                            Intent intent = new Intent(Cooking.this, Cooking.class);
+                            overridePendingTransition(0,0);
+                            startActivity(intent);
+                            overridePendingTransition(0,0);
+
+                        } catch (JSONException e) {
+                            Log.e("Einkaufsliste", e.getMessage());
+                        }
 
                     }
                 });
@@ -138,7 +148,7 @@ public class Cooking extends AppCompatActivity {
 
                 // add amount TV
                 final FrameLayout amountFL = new FrameLayout(this);
-                amountTV = new EditText(this);
+                EditText amountTV = new EditText(this);
                 amountFL.setLayoutParams(frameLayout.getLayoutParams());
                 amountTV.setLayoutParams(columnLayout.getLayoutParams());
                 amountTV.setInputType(2);
@@ -151,18 +161,35 @@ public class Cooking extends AppCompatActivity {
                 final Button qrBtn = new Button(this);
                 qrFL.setLayoutParams(frameLayout.getLayoutParams());
                 qrBtn.setLayoutParams(columnLayout.getLayoutParams());
-                //Drawable plusBtn = getResources().getDrawable(R.drawable.add_cooking);
-                //qrBtn.setBackground(plusBtn);
+                qrBtn.setText("+");
+                qrBtn.setTextSize(30);
+                qrBtn.setBackgroundColor(Color.parseColor("#52BCE2"));
                 qrBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        float menge = Float.parseFloat(amount);
-                        menge = menge+1;
-                        amount = Float.toString(menge);
-                        setAmountTV(amount);
+                        try {
+                            JSONArray jsonArray = einkaufsListeDB.getStockDataJson();
+                            JSONObject object1 = jsonArray.getJSONObject(tmp);
+                            int ID = object1.getInt("id");
+                            String menge = object1.getString("menge");
+                            float menge2 = Float.parseFloat(menge);
+                            ContentValues contentValues = new ContentValues();
+                            String amount2 = Float.toString(menge2+1);
+                            contentValues.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount2);
+
+                            einkaufsListeDB.updateItemVorrat(ID, contentValues);
+
+                            Intent intent = new Intent(Cooking.this, Cooking.class);
+                            overridePendingTransition(0,0);
+                            startActivity(intent);
+                            overridePendingTransition(0,0);
+
+                        } catch (JSONException e) {
+                            Log.e("Einkaufsliste", e.getMessage());
+                        }
                     }
                 });
-                final int tmp = i;
+
                 qrFL.addView(qrBtn);
                 neuLL.addView(qrFL);
 
@@ -177,9 +204,9 @@ public class Cooking extends AppCompatActivity {
 
     }
 
-    public void setAmountTV(String a){
-        amountTV.setText(a);
-    }
+    //public void setAmountTV(String a){
+      //  amountTV.setText(a);
+    //}
 
     public void openEinkaufsListe(){
         Intent intent = new Intent(this, EinkaufsListe.class);

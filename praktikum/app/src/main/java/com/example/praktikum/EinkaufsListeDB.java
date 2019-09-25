@@ -178,5 +178,10 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
         db.update(DBHelper.GroceryEntry.TABLE_NAME1, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
     }
 
+    public void updateItemVorrat(int id, ContentValues content){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.update(DBHelper.GroceryEntry.TABLE_NAME2, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
+    }
+
 
 }
