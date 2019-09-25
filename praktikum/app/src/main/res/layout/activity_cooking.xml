@@ -32,80 +32,85 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TableLayout
-            android:id="@+id/tableLayout_Cooking"
+            android:id="@+id/tableLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TableRow
-                android:id="@+id/rowLayout_Cooking"
+                android:id="@+id/rowLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/LL_Cooking"
+                    android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <FrameLayout
-                        android:id="@+id/FL_Cooking_Product"
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:id="@+id/frameLayoutProduct"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/columnLayout_Cooking_Product"
+                            android:id="@+id/columnLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
+                            android:fontFamily="@font/concert_one"
                             android:text="@string/product_name"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            tools:layout_editor_absoluteX="-125dp"
+                            tools:layout_editor_absoluteY="25dp" />
                     </FrameLayout>
 
                     <FrameLayout
-                        android:id="@+id/FL_Cooking_increase"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/TV_Cooking_increase"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textSize="18sp" />
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:id="@+id/FL_Cooking_Amount"
-                        android:layout_width="160dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/columnLayout_Cooking_Amount"
+                            android:id="@+id/textView3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
+                            android:fontFamily="@font/concert_one"
+                            android:text="-"
+                            android:textSize="18sp"
+                            tools:layout_editor_absoluteX="-20dp"
+                            tools:layout_editor_absoluteY="25dp" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/concert_one"
                             android:text="@string/amount"
                             android:textSize="18sp"
-                            android:inputType="number"/>
+                            tools:layout_editor_absoluteX="85dp"
+                            tools:layout_editor_absoluteY="25dp" />
                     </FrameLayout>
 
                     <FrameLayout
-                        android:id="@+id/FL_Cooking_decrease"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/TV_Cooking_decrease"
+                            android:id="@+id/textView5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/concert_one"
+                            android:text="+"
                             android:textSize="18sp" />
                     </FrameLayout>
 
