@@ -27,6 +27,7 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
         super(context, DATABASE_NAME,null, DATABASE_VERSION);
     }
 
+    //Erstelle Datenbanktabellen
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_EINKAUFSLISTE_TABLE = "CREATE TABLE " + GroceryEntry.TABLE_NAME1 + " (" +
@@ -54,6 +55,7 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
 
     }
 
+    //Bekomme alle Daten aus der Tabelle
     public Cursor getAllData1(){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * from " + GroceryEntry.TABLE_NAME1,null);
@@ -65,6 +67,7 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * from " + GroceryEntry.TABLE_NAME2,null);
     }
 
+    //Bekomme alle Daten aus der DB und speichere sie in einem JSONArray
     public JSONArray getStockDataJson(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor result = db.rawQuery("SELECT * from " + GroceryEntry.TABLE_NAME2,null);
@@ -93,6 +96,7 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
         return resultSet;
     }
 
+    //Bekomme Daten aus der DB bei dem der Name übereinstimmt.
     public Cursor getNameData2(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + GroceryEntry.TABLE_NAME2 + " WHERE Name = " + "'" + name + "'", null);
@@ -103,11 +107,13 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + GroceryEntry.TABLE_NAME1 + " WHERE Name = " + "'" + name + "'", null);
     }
 
+    //Bekomme Daten aus der DB bei dem die ID übereinstimmt
     public Cursor getIdData1(int ID){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + GroceryEntry.TABLE_NAME1 + " WHERE id = " + "'" + ID + "'", null);
     }
 
+    //Füge Item der DB hinzu
     public void addItemEListe(@Nullable String barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -138,6 +144,7 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
         }
     }
 
+    //Siehe Funktion in Einkaufsliste. Wird benötigt falls DB nicht richtig initialisiert.
     public boolean checkNameInEinkaufsListe1(String Name){
         String sql = "SELECT * FROM " + DBHelper.GroceryEntry.TABLE_NAME1 + " WHERE Name = " + "'" + Name + "'";
         SQLiteDatabase db = this.getReadableDatabase();
@@ -149,6 +156,7 @@ public class EinkaufsListeDB extends SQLiteOpenHelper {
         return false;
     }
 
+    //Siehe Funktion in Einkaufsliste. Wird benötigt falls DB nicht richtig initialisiert.
     public JSONArray getProductAll(Cursor result) {
         JSONArray resultSet = new JSONArray();
 

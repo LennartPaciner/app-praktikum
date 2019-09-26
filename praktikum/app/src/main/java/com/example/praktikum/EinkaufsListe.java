@@ -105,10 +105,8 @@ public class EinkaufsListe extends AppCompatActivity {
 
     }
 
-    public void increase(){
-        amount++;
-    }
 
+    //Erstelle Ansicht für die Activity mittels eines Cursors der einem die Daten aus der DB liest und in ein JSONArray umgewandelt wird.
     public void createEinkaufsliste(){
         JSONArray arr = getProductAll(einkaufsListe.getAllData1());
         for(int i = 0; i < arr.length(); i++){
@@ -203,7 +201,7 @@ public class EinkaufsListe extends AppCompatActivity {
 
     }
 
-
+    //Füge neues Item der DB für Vorrat hinzu. Falls es schon vorkommt, update den Betrag und vermeide doppeltes Vorkommen.
     public void addItemVorrat(@Nullable Long barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock){
 
         ContentValues cv = new ContentValues();
@@ -237,7 +235,7 @@ public class EinkaufsListe extends AppCompatActivity {
 
     }
 
-
+    //Füge neues Item der DB für Einkaufsliste hinzu. Falls es schon vorkommt, update den Betrag und vermeide doppeltes Vorkommen.
     public void addItemEinkaufsliste(@Nullable Long barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock){
 
         ContentValues cv = new ContentValues();
@@ -286,6 +284,7 @@ public class EinkaufsListe extends AppCompatActivity {
         database.update(DBHelper.GroceryEntry.TABLE_NAME2, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
     }
 
+    //Bekomme Cursor aus der DB und wandle die Daten in ein JSONArray um.
     public JSONArray getProductAll(Cursor result) {
         JSONArray resultSet = new JSONArray();
 
@@ -310,6 +309,7 @@ public class EinkaufsListe extends AppCompatActivity {
         return resultSet;
     }
 
+    //Neues Dialogfenster um Name und Menge eines neuen Items eingeben zu können.
     public void showDialogBox(String text){
 
         LayoutInflater factory = LayoutInflater.from(this);
@@ -364,6 +364,7 @@ public class EinkaufsListe extends AppCompatActivity {
         return bd.floatValue();
     }
 
+    //Überprüfe um Item schon in der DB vorkommt, mithilfe des Namens. Wird beim Hinzufügen aufgerufen.
     public boolean checkNameInEinkaufsListe1(String Name){
         String sql = "SELECT * FROM " + DBHelper.GroceryEntry.TABLE_NAME1 + " WHERE Name = " + "'" + Name + "'";
 

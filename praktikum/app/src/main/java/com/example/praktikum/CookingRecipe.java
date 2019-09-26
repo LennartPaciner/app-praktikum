@@ -33,12 +33,14 @@ public class CookingRecipe extends AppCompatActivity {
         String image = intent.getStringExtra(CookingView.EXTRA_IMAGE);
         String meal = intent.getStringExtra(CookingView.EXTRA_MEAL);
 
+        //Zeige Anleitung für das Gericht aus der API an
         loadImage(image);
         textView.setText(descr);
         textView2.setText(meal);
 
     }
 
+    //Lade Bild aus der API und zeige es in einer ImageView an.
     public void loadImage(String url){
         Picasso.with(this).load(url).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(imageView, new com.squareup.picasso.Callback() {
             @Override

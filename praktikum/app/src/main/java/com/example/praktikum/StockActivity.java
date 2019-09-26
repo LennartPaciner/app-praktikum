@@ -80,6 +80,7 @@ public class StockActivity extends AppCompatActivity {
 
     }
 
+    //Erstelle Ansicht mittels JSONArray der seine Daten per Cursor aus der DB bekommt.
     public void createVorratliste(JSONArray array){
         JSONArray arr = array;
         for(int i = 0; i < arr.length(); i++){
@@ -175,6 +176,7 @@ public class StockActivity extends AppCompatActivity {
 
     }
 
+    //Lösche Item aus der Db und so auch aus der Ansicht.
     public void removeItemDB(int id){
         database.delete(DBHelper.GroceryEntry.TABLE_NAME2, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
 

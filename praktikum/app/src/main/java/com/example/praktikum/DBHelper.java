@@ -6,6 +6,7 @@ public class DBHelper {
 
     private DBHelper() {}
 
+    //Hilfsklasse für die DB
     public static final class GroceryEntry implements BaseColumns {
         public static final String TABLE_NAME1 = "Einkaufsliste";
         public static final String TABLE_NAME2 = "Vorrat";
