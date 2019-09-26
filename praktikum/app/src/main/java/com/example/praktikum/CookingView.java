@@ -97,6 +97,7 @@ public class CookingView extends AppCompatActivity {
         });
     }
 
+    //Funktion um Essen oder Zutat für Essen einzugeben per Edittext und Dialogfenster und damit in der API zu suchen.
     public void openDialog() {
         LayoutInflater factory = LayoutInflater.from(this);
         final View textEntryView = factory.inflate(R.layout.text_entry2, null);
@@ -108,7 +109,7 @@ public class CookingView extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 essenApi = input.getText().toString();
-                //Toast.makeText(getApplicationContext(), essenApi, Toast.LENGTH_LONG).show();
+
                 if(!flag){
                     flag = true;
                     jsonParse(essenApi);
@@ -128,6 +129,7 @@ public class CookingView extends AppCompatActivity {
         builder.show();
     }
 
+    //Funktion um die Anzeige leer zu machen.
     public void clearView(){
         TableLayout tableLayout = findViewById(R.id.tableLayout1);
         TableRow tableRow = findViewById(R.id.rowLayout);
@@ -135,14 +137,8 @@ public class CookingView extends AppCompatActivity {
         tableLayout.addView(tableRow);
     }
 
-    //public String getText(){
-    //EditText editText = findViewById(R.id.edit_text);
-    //  String essen = editText.getText().toString();
-    //Toast.makeText(this, essen, Toast.LENGTH_SHORT).show();
-    //return essen;
 
-    //}
-
+    //Bekomme Ergebnisse per API und speichere Ergebnisse in einem JSONArray
     public void jsonParse(String essen) {
         //String url = "https://www.themealdb.com/api/json/v1/1/random.php";
         String url = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + essen;
@@ -173,6 +169,7 @@ public class CookingView extends AppCompatActivity {
 
     }
 
+    //Erstelle Ansicht mit einem JSONArray und zeige die Ergebnisse an.
     public JSONArray createView(JSONArray arr) {
 
         for (int i = 0; i < arr.length(); i++) {
@@ -251,6 +248,7 @@ public class CookingView extends AppCompatActivity {
     }
 
 
+    //Öffne neue Activity um Bild des Essens und Anleitung anzuzeigen.
     public void openRecipe(String btnS) {
         String zahl = "";
         int count = 0;
@@ -274,6 +272,7 @@ public class CookingView extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Bekomme Anleitung aus der API
     public String getDescription(JSONArray array, int zahl) {
             try {
                 JSONObject object = array.getJSONObject(zahl-1);
@@ -286,6 +285,7 @@ public class CookingView extends AppCompatActivity {
         return "Fehler";
     }
 
+    //Bekomme BILD aus der API
     public String getImage(JSONArray array, int zahl) {
             try {
                 JSONObject object = array.getJSONObject(zahl-1);
@@ -298,6 +298,7 @@ public class CookingView extends AppCompatActivity {
         return "Fehler";
     }
 
+    //Bekomme Essensnamen aus der API
     public String getMeal(JSONArray array, int zahl){
         try {
             JSONObject object = array.getJSONObject(zahl-1);

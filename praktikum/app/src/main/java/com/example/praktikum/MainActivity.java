@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Sprachenanpassung
     private void languageSetting(){
         if (getIntent().getStringExtra("startingLanguage") != null) {
             appLanguage = getResources().getConfiguration().locale.toString();

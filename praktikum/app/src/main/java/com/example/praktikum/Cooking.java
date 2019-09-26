@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -79,6 +81,8 @@ public class Cooking extends AppCompatActivity {
         createEinkaufsliste();
     }
 
+    //Erstelle Layout für Cooking Activity und zeige richtige Wert aus der dafür zuständigen Tabelle aus der DB an
+    //Speichert Veränderungen auch beim Vorrat und in der DB.
     public void createEinkaufsliste(){
         JSONArray arr = einkaufsListe.getProductAll(einkaufsListeDB.getAllData2());
         for(int i = 0; i < arr.length(); i++){
@@ -108,7 +112,7 @@ public class Cooking extends AppCompatActivity {
                 nameFL.addView(nameTV);
                 neuLL.addView(nameFL);
 
-                // add amount checkBox
+                // add amount checkBox.
                 FrameLayout deleteFL = new FrameLayout(this);
                 Button deleteListe = new Button(this);
                 deleteFL.setLayoutParams(frameLayout.getLayoutParams());
@@ -146,9 +150,36 @@ public class Cooking extends AppCompatActivity {
                 });
                 neuLL.addView(deleteFL);
 
-                // add amount TV
+                // add amount TV. Bekomme Edittext input ohne Save Button per Textwatcher.
                 final FrameLayout amountFL = new FrameLayout(this);
-                EditText amountTV = new EditText(this);
+                final EditText amountTV = new EditText(this);
+                amountTV.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        try {
+                            JSONArray jsonArray = einkaufsListeDB.getStockDataJson();
+                            JSONObject object1 = jsonArray.getJSONObject(tmp);
+                            int ID = object1.getInt("id");
+                            String neuerWert = amountTV.getText().toString();
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, neuerWert);
+
+                            einkaufsListeDB.updateItemVorrat(ID, contentValues);
+                        }catch (JSONException e) {
+                            Log.e("Einkaufsliste", e.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
                 amountFL.setLayoutParams(frameLayout.getLayoutParams());
                 amountTV.setLayoutParams(columnLayout.getLayoutParams());
                 amountTV.setInputType(2);
@@ -204,9 +235,6 @@ public class Cooking extends AppCompatActivity {
 
     }
 
-    //public void setAmountTV(String a){
-      //  amountTV.setText(a);
-    //}
 
     public void openEinkaufsListe(){
         Intent intent = new Intent(this, EinkaufsListe.class);
