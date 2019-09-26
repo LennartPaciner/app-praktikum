@@ -38,13 +38,13 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
         scannerView = new ZXingScannerView(this);
         setContentView(scannerView);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        //if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(checkPermission()){
                 Toast.makeText(Barcode.this, "Permisson OK!", Toast.LENGTH_LONG).show();
             }else{
                 requestPermission();
             }
-        }
+        //}
     }
 
     @Override
@@ -98,19 +98,19 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                         Toast.makeText(Barcode.this, "Permission granted", Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(Barcode.this, "Permission denied", Toast.LENGTH_LONG).show();
-                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        //if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                             if(shouldShowRequestPermissionRationale(CAMERA)){
                                 displayAlertMessege("You need camera permission", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                        //if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                                             requestPermissions(new String[]{CAMERA}, REQUEST_CAMERA);
-                                        }
+                                        //}
                                     }
                                 });
                                 return;
                             }
-                        }
+                        //}
                     }
                 }
                 break;
@@ -121,7 +121,7 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
     @Override
     public void onResume(){
         super.onResume();
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        //if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(checkPermission()){
                 if(scannerView == null){
                     scannerView = new ZXingScannerView(this);
@@ -132,7 +132,7 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
             }else{
                 requestPermission();
             }
-        }
+        //}
     }
 
     @Override
