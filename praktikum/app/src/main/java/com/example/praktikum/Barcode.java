@@ -73,7 +73,8 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int whichButton) {
-                        return;
+                        Intent intent = new Intent(Barcode.this, EinkaufsListe.class);
+                        startActivity(intent);
                     }
                 });
         alert.show();
