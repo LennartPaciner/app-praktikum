@@ -34,10 +34,16 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_barcode);
+
+        /*
+         * Add Barcode scanner view to Activity
+         */
         scannerView = new ZXingScannerView(this);
         setContentView(scannerView);
 
+        /*
+         * Uncomment API-level check for old LG device -> Worked
+         */
         //if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(checkPermission()){
                 Toast.makeText(Barcode.this, "Permisson OK!", Toast.LENGTH_LONG).show();
@@ -47,6 +53,9 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
         //}
     }
 
+    /*
+     * Open Dialog after Barcode scan to enter Values
+     */
     @Override
     public void handleResult(Result result) {
         final String scanResult = result.getText();
@@ -89,6 +98,9 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
         ActivityCompat.requestPermissions(this, new String[]{CAMERA}, REQUEST_CAMERA);
     }
 
+    /*
+     * Toast on Permission denied
+     */
     public void onRequestPermissionsResult(int requestCode, String permissions[], int grantResults[]){
         switch(requestCode){
             case REQUEST_CAMERA:
@@ -118,6 +130,9 @@ public class Barcode extends AppCompatActivity implements ZXingScannerView.Resul
 
     }
 
+    /*
+     * Add scanner View again after Resume Activity
+     */
     @Override
     public void onResume(){
         super.onResume();
