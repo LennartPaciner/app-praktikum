@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -37,12 +38,14 @@ public class CookingView extends AppCompatActivity {
     private JSONArray jsonArray2;
     public static final String EXTRA_DESC = "intent_desc";
     public static final String EXTRA_IMAGE = "intent_image";
+    public static final String EXTRA_MEAL = "intent_meal";
+    public boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cooking_view);
-
+        flag = false;
         //textView = findViewById(R.id.text_view_result);
         Button buttonP = findViewById(R.id.button_parse);
 
@@ -56,8 +59,45 @@ public class CookingView extends AppCompatActivity {
         });
 
 
+
+
+
+        Button einkaufButton = findViewById(R.id.buttonRecipe_CheckList);
+        einkaufButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEinkaufsListe();
+            }
+        });
+
+
+        Button homeButton = findViewById(R.id.buttonHome);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMainActivity();
+            }
+        });
+
+
+        Button stockButton = findViewById(R.id.buttonRecipe_Stock);
+        stockButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openStockActivity();
+            }
+        });
+
+        Button cookingButton = findViewById(R.id.buttonRecipe_Cooking);
+        cookingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCooking();
+            }
+        });
     }
 
+    //Funktion um Essen oder Zutat für Essen einzugeben per Edittext und Dialogfenster und damit in der API zu suchen.
     public void openDialog() {
         LayoutInflater factory = LayoutInflater.from(this);
         final View textEntryView = factory.inflate(R.layout.text_entry2, null);
@@ -69,8 +109,15 @@ public class CookingView extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 essenApi = input.getText().toString();
-                //Toast.makeText(getApplicationContext(), essenApi, Toast.LENGTH_LONG).show();
-                jsonParse(essenApi);
+
+                if(!flag){
+                    flag = true;
+                    jsonParse(essenApi);
+                }else{
+                    clearView();
+                    jsonParse(essenApi);
+                }
+
             }
         }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
@@ -82,14 +129,16 @@ public class CookingView extends AppCompatActivity {
         builder.show();
     }
 
-    //public String getText(){
-    //EditText editText = findViewById(R.id.edit_text);
-    //  String essen = editText.getText().toString();
-    //Toast.makeText(this, essen, Toast.LENGTH_SHORT).show();
-    //return essen;
+    //Funktion um die Anzeige leer zu machen.
+    public void clearView(){
+        TableLayout tableLayout = findViewById(R.id.tableLayout1);
+        TableRow tableRow = findViewById(R.id.rowLayout);
+        tableLayout.removeAllViews();
+        tableLayout.addView(tableRow);
+    }
 
-    //}
 
+    //Bekomme Ergebnisse per API und speichere Ergebnisse in einem JSONArray
     public void jsonParse(String essen) {
         //String url = "https://www.themealdb.com/api/json/v1/1/random.php";
         String url = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + essen;
@@ -120,6 +169,7 @@ public class CookingView extends AppCompatActivity {
 
     }
 
+    //Erstelle Ansicht mit einem JSONArray und zeige die Ergebnisse an.
     public JSONArray createView(JSONArray arr) {
 
         for (int i = 0; i < arr.length(); i++) {
@@ -170,16 +220,17 @@ public class CookingView extends AppCompatActivity {
 
                 // add button
                 FrameLayout qrFL = new FrameLayout(this);
-                Button qrBtn = new Button(this);
+                final Button qrBtn = new Button(this);
                 qrFL.setLayoutParams(frameLayout.getLayoutParams());
                 qrBtn.setLayoutParams(columnLayout.getLayoutParams());
-                qrBtn.setText("Rezept");
+                int tmp = i+1;
+                qrBtn.setText("Rezept " +tmp);
                 qrFL.addView(qrBtn);
                 neuLL.addView(qrFL);
                 qrBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        openRecipe();
+                        openRecipe(qrBtn.getText().toString());
 
                     }
                 });
@@ -197,48 +248,87 @@ public class CookingView extends AppCompatActivity {
     }
 
 
-    public void openRecipe() {
-        String description = getDescription(jsonArray2);
-        String imageApi = getImage(jsonArray2);
-        //Toast.makeText(this, imageApi, Toast.LENGTH_SHORT).show();
+    //Öffne neue Activity um Bild des Essens und Anleitung anzuzeigen.
+    public void openRecipe(String btnS) {
+        String zahl = "";
+        int count = 0;
+        for(char c : btnS.toCharArray()){
+            if(count > 6){
+                zahl+= c;
+            }else{
+                count += 1;
+            }
+        }
+        int zahlI = Integer.parseInt(zahl);
+        String description = getDescription(jsonArray2, zahlI);
+        String imageApi = getImage(jsonArray2, zahlI);
+        String meal = getMeal(jsonArray2, zahlI);
+
         Intent intent = new Intent(this, CookingRecipe.class);
         intent.putExtra(EXTRA_DESC, description);
         intent.putExtra(EXTRA_IMAGE, imageApi);
+        intent.putExtra(EXTRA_MEAL, meal);
 
         startActivity(intent);
     }
 
-    public String getDescription(JSONArray array) {
-        //gibt immer das gleiche aus. Brauchen für jede reihe speziellen button oder beschreibung per id vergleichen und so die richtige
-        //auslesen aus json array. Noch fixen. Hilfe maurice
-
-        for (int i = 0; i < array.length(); i++) {
+    //Bekomme Anleitung aus der API
+    public String getDescription(JSONArray array, int zahl) {
             try {
-                JSONObject object = array.getJSONObject(i);
+                JSONObject object = array.getJSONObject(zahl-1);
                 String descr = object.getString("strInstructions");
                 return descr;
             } catch (JSONException e) {
                 Log.e("Einkaufsliste", e.getMessage());
                 e.printStackTrace();
             }
-        }
         return "Fehler";
     }
 
-    public String getImage(JSONArray array) {
-        //gibt immer das gleiche aus. Brauchen für jede reihe speziellen button oder beschreibung per id vergleichen und so die richtige
-        //auslesen aus json array. Noch fixen. Hilfe maurice
-
-        for (int i = 0; i < array.length(); i++) {
+    //Bekomme BILD aus der API
+    public String getImage(JSONArray array, int zahl) {
             try {
-                JSONObject object = array.getJSONObject(i);
+                JSONObject object = array.getJSONObject(zahl-1);
                 String image = object.getString("strMealThumb");
                 return image;
             } catch (JSONException e) {
                 Log.e("Einkaufsliste", e.getMessage());
                 e.printStackTrace();
             }
+        return "Fehler";
+    }
+
+    //Bekomme Essensnamen aus der API
+    public String getMeal(JSONArray array, int zahl){
+        try {
+            JSONObject object = array.getJSONObject(zahl-1);
+            String meal1 = object.getString("strMeal");
+            return meal1;
+        } catch (JSONException e) {
+            Log.e("Einkaufsliste", e.getMessage());
+            e.printStackTrace();
         }
         return "Fehler";
+    }
+
+
+    public void openEinkaufsListe(){
+        Intent intent = new Intent(this, EinkaufsListe.class);
+        startActivity(intent);
+    }
+
+    public void openCooking(){
+        Intent intent = new Intent(this, Cooking.class);
+        startActivity(intent);
+    }
+
+    public void openStockActivity(){
+        Intent intent = new Intent(this, StockActivity.class);
+        startActivity(intent);
+    }
+
+    public void openMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

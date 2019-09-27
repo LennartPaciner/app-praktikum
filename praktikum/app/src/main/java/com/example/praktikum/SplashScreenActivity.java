@@ -18,7 +18,6 @@ public class SplashScreenActivity extends AppCompatActivity {
     private ConstraintLayout layout;
     private boolean endedBeforeLoading = false;
     private Thread myThread;
-    private boolean startLayoutFirstTime = true;
     private String[] colors = new String[]{
           //  "#D2FAFB",  // light blue
             "#C93838",  // dark red
@@ -55,8 +54,10 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    intent.putExtra("startingLanguage", getResources().getConfiguration().locale.toString());
                     sleep(3000);
                     if (!endedBeforeLoading){
+                    //    getIntent().putExtra("firstStart", "firstStart");
                         startActivity(intent);
                     }
                     finish();
@@ -66,6 +67,11 @@ public class SplashScreenActivity extends AppCompatActivity {
             }
         };
         myThread.start();
+
+        //getIntent().putExtra("firstStart", true);
+
+
+
 
         layout = findViewById(R.id.constraintLayout);
 
@@ -78,7 +84,6 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeBackgroundColor();
-
                 nextColor = taps++ % colors.length;
             }
         });
@@ -97,13 +102,11 @@ public class SplashScreenActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         endedBeforeLoading = true;
-        startLayoutFirstTime = false;
     }
 
     @Override
     protected void onUserLeaveHint() {
         super.onUserLeaveHint();
         endedBeforeLoading = true;
-        startLayoutFirstTime = false;
     }
 }

@@ -55,12 +55,14 @@
                     android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <FrameLayout
                         android:id="@+id/frameLayoutProduct"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/columnLayout"
@@ -69,15 +71,16 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/concert_one"
-                            android:text="Name"
+                            android:text="@string/name_title"
                             android:textSize="18sp"
                             tools:layout_editor_absoluteX="-125dp"
                             tools:layout_editor_absoluteY="25dp" />
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/textView3"
@@ -93,8 +96,9 @@
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/textView4"
@@ -103,15 +107,16 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/concert_one"
-                            android:text="ID"
+                            android:text="@string/id_title"
                             android:textSize="18sp"
                             tools:layout_editor_absoluteX="85dp"
                             tools:layout_editor_absoluteY="25dp" />
                     </FrameLayout>
 
                     <FrameLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent">
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/textView5"
@@ -139,7 +144,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/add_1"
+        android:background="@drawable/book"
         app:layout_constraintBottom_toTopOf="@+id/SView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -161,11 +166,24 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/buttonStock"
+                android:id="@+id/buttonRecipe_CheckList"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:background="@drawable/shopping_basket"
+                android:gravity="center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/buttonRecipe_Stock"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
                 android:background="@drawable/fridge" />
         </FrameLayout>
 
@@ -175,26 +193,11 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/buttonCooking"
+                android:id="@+id/buttonRecipe_Cooking"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:background="@drawable/chef" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <Button
-                android:id="@+id/buttonRecipe"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/recipe_book" />
         </FrameLayout>
 
     </LinearLayout>

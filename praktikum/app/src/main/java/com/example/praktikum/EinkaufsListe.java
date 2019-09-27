@@ -47,8 +47,7 @@ public class EinkaufsListe extends AppCompatActivity {
     public Button addProduct;
     private static DecimalFormat df2 = new DecimalFormat("#.###");
     public EinkaufsListeDB einkaufsListe;
-    private Button homeButton;
-    private Button stockButton;
+
 
 
     @Override
@@ -67,7 +66,7 @@ public class EinkaufsListe extends AppCompatActivity {
         einkaufsListe = new EinkaufsListeDB(this);
         database = einkaufsListe.getWritableDatabase();
 
-        stockButton = findViewById(R.id.buttonStock);
+        Button stockButton = findViewById(R.id.buttonCheckList_Stock);
         stockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,9 +74,25 @@ public class EinkaufsListe extends AppCompatActivity {
             }
         });
 
+        Button cookingButton = findViewById(R.id.buttonCheckList_Cooking);
+        cookingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCookingActivity();
+            }
+        });
+
+        Button recipeButton = findViewById(R.id.buttonCheckList_Recipe);
+        recipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRecipeActivity();
+            }
+        });
 
 
-        homeButton = findViewById(R.id.buttonHome);
+
+        Button homeButton = findViewById(R.id.buttonHome);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,11 +105,8 @@ public class EinkaufsListe extends AppCompatActivity {
 
     }
 
-    public void increase(){
-        amount++;
 
-    }
-
+    //Erstelle Ansicht für die Activity mittels eines Cursors der einem die Daten aus der DB liest und in ein JSONArray umgewandelt wird.
     public void createEinkaufsliste(){
         JSONArray arr = getProductAll(einkaufsListe.getAllData1());
         for(int i = 0; i < arr.length(); i++){
@@ -128,7 +140,7 @@ public class EinkaufsListe extends AppCompatActivity {
                 TextView amountTV = new TextView(this);
                 amountFL.setLayoutParams(frameLayout.getLayoutParams());
                 amountTV.setLayoutParams(columnLayout.getLayoutParams());
-                amountTV.setText(amount + " gramm");
+                amountTV.setText(amount);
                 amountFL.addView(amountTV);
                 neuLL.addView(amountFL);
 
@@ -152,12 +164,31 @@ public class EinkaufsListe extends AppCompatActivity {
 
                 // add qr
                 FrameLayout qrFL = new FrameLayout(this);
-                Button qrBtn = new Button(this);
+                final Button qrBtn = new CheckBox(this);
                 qrFL.setLayoutParams(frameLayout.getLayoutParams());
                 qrBtn.setLayoutParams(columnLayout.getLayoutParams());
-                qrBtn.setText("QR");
+                final int tmp = i;
                 qrFL.addView(qrBtn);
                 neuLL.addView(qrFL);
+                qrBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        JSONArray resultID = getProductAll(einkaufsListe.getAllData1());
+                        if(((CheckBox) qrBtn).isChecked()){
+                            try {
+                                JSONObject object = resultID.getJSONObject(tmp);
+                                String name = object.getString("name");
+                                String amount = object.getString("menge");
+                                addItemVorrat(null, name, amount,null,null);
+                                int id = object.getInt("id");
+                                removeItemDB(id);
+                            }catch (JSONException e){
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
+
 
                 neu.addView(neuLL);
                 tableLayout.addView(neu);
@@ -170,35 +201,67 @@ public class EinkaufsListe extends AppCompatActivity {
 
     }
 
+    //Füge neues Item der DB für Vorrat hinzu. Falls es schon vorkommt, update den Betrag und vermeide doppeltes Vorkommen.
+    public void addItemVorrat(@Nullable Long barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock){
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(DBHelper.GroceryEntry.COLUMN_BARCODE, barcode);
+        cv.put(DBHelper.GroceryEntry.COLUMN_NAME, name);
+        //amount nicht vorher reinmachen, da sonst doppelter betrag wegen updateDB
+        cv.put(DBHelper.GroceryEntry.COLUMN_MHD, mhd);
+        cv.put(DBHelper.GroceryEntry.COLUMN_RESTOCK, restock);
+
+        if (!checkNameInEinkaufsListe2(name)){
+            cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount);
+            database.insert(DBHelper.GroceryEntry.TABLE_NAME2, null,cv);
+        }
+        else{
+            JSONArray resultID = getProductAll(einkaufsListe.getNameData2(name));
+            for(int i = 0; i < resultID.length(); i++){
+                try {
+                    JSONObject object = resultID.getJSONObject(i);
+                    final int iD = object.getInt("id");
+                    float menge = Float.parseFloat(object.getString("menge"));
+                    float ergebnis = menge+ Float.parseFloat(amount);
+                    cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, Float.toString(ergebnis));
+                    updateItemDB2(iD, cv);
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    //Füge neues Item der DB für Einkaufsliste hinzu. Falls es schon vorkommt, update den Betrag und vermeide doppeltes Vorkommen.
     public void addItemEinkaufsliste(@Nullable Long barcode, String name, @Nullable String amount, @Nullable String mhd, @Nullable Integer restock){
 
         ContentValues cv = new ContentValues();
 
         cv.put(DBHelper.GroceryEntry.COLUMN_BARCODE, barcode);
         cv.put(DBHelper.GroceryEntry.COLUMN_NAME, name);
-        cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount);
+        //amount nicht vorher reinmachen, da sonst doppelter betrag wegen updateDB
         cv.put(DBHelper.GroceryEntry.COLUMN_MHD, mhd);
         cv.put(DBHelper.GroceryEntry.COLUMN_RESTOCK, restock);
 
-        database.insert(DBHelper.GroceryEntry.TABLE_NAME1, null, cv);
-
-        if (!checkNameInEinkaufsListe2(name)){
-            database.insert(DBHelper.GroceryEntry.TABLE_NAME2, null,cv);
+        if (!checkNameInEinkaufsListe1(name)){
+            cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, amount);
+            database.insert(DBHelper.GroceryEntry.TABLE_NAME1, null, cv);
         }
-        else{
-            JSONArray resultID = getProductAll(einkaufsListe.getIdData2(name));
-            for(int i = 0; i < resultID.length(); i++){
+        else {
+            JSONArray resultID = getProductAll(einkaufsListe.getNameData1(name));
+            for (int i = 0; i < resultID.length(); i++) {
                 try {
                     JSONObject object = resultID.getJSONObject(i);
-                    Toast.makeText(this, object.toString(), Toast.LENGTH_LONG).show();
                     final int iD = object.getInt("id");
-                    int menge = Integer.parseInt(object.getString("menge"));
-                    int ergebnis = menge+ Integer.parseInt(amount);
-                    String str = String.valueOf(ergebnis);
-                    cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, str);
-                    updateItemDB(iD, cv);
+                    float menge = Float.parseFloat(object.getString("menge"));
+                    float ergebnis = menge + Float.parseFloat(amount);
+                    cv.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, Float.toString(ergebnis));
+                    updateItemDB1(iD, cv);
 
-                }catch (JSONException e){
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -211,14 +274,17 @@ public class EinkaufsListe extends AppCompatActivity {
 
     }
 
-    public void updateItemDB(int id, ContentValues content){
-        database.update(DBHelper.GroceryEntry.TABLE_NAME2, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
-        //ContentValues con = new ContentValues();
-        //con.put(DBHelper.GroceryEntry.COLUMN_NAME, "nudel");
-        //con.put(DBHelper.GroceryEntry.COLUMN_AMOUNT, 10);
-        //updateItemDB(4, con);
+    public void updateItemDB1(int id, ContentValues content){
+        database.update(DBHelper.GroceryEntry.TABLE_NAME1, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
+
     }
 
+
+    public void updateItemDB2(int id, ContentValues content){
+        database.update(DBHelper.GroceryEntry.TABLE_NAME2, content, DBHelper.GroceryEntry.COLUMN_ID + "=" + id, null);
+    }
+
+    //Bekomme Cursor aus der DB und wandle die Daten in ein JSONArray um.
     public JSONArray getProductAll(Cursor result) {
         JSONArray resultSet = new JSONArray();
 
@@ -243,6 +309,7 @@ public class EinkaufsListe extends AppCompatActivity {
         return resultSet;
     }
 
+    //Neues Dialogfenster um Name und Menge eines neuen Items eingeben zu können.
     public void showDialogBox(String text){
 
         LayoutInflater factory = LayoutInflater.from(this);
@@ -256,13 +323,12 @@ public class EinkaufsListe extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int whichButton) {
-                        if(!checkNameInEinkaufsListe1(input1.toString())){
                             if(input2.getText().toString().equals("")){
                                 addItemEinkaufsliste(null, input1.getText().toString(),null , null, null);
-
-
                                 Intent intentEL = new Intent(EinkaufsListe.this, EinkaufsListe.class);
+                                overridePendingTransition(0, 0);
                                 startActivity(intentEL);
+                                overridePendingTransition(0, 0);
                             }else{
                                 float input = Float.parseFloat(input2.getText().toString());
                                 String amount = df2.format(input);
@@ -270,9 +336,10 @@ public class EinkaufsListe extends AppCompatActivity {
 
 
                                 Intent intentEL = new Intent(EinkaufsListe.this, EinkaufsListe.class);
+                                overridePendingTransition(0, 0);
                                 startActivity(intentEL);
+                                overridePendingTransition(0, 0);
                             }
-                        }
                     }
                 }).setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
@@ -281,6 +348,13 @@ public class EinkaufsListe extends AppCompatActivity {
                         return;
                     }
                 });
+        alert.setNeutralButton("Barcode", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(EinkaufsListe.this, Barcode.class);
+                startActivity(intent);
+            }
+        });
         alert.show();
     }
 
@@ -290,6 +364,7 @@ public class EinkaufsListe extends AppCompatActivity {
         return bd.floatValue();
     }
 
+    //Überprüfe um Item schon in der DB vorkommt, mithilfe des Namens. Wird beim Hinzufügen aufgerufen.
     public boolean checkNameInEinkaufsListe1(String Name){
         String sql = "SELECT * FROM " + DBHelper.GroceryEntry.TABLE_NAME1 + " WHERE Name = " + "'" + Name + "'";
 
@@ -320,6 +395,16 @@ public class EinkaufsListe extends AppCompatActivity {
 
     public void openStockActivity(){
         Intent intent = new Intent(this, StockActivity.class);
+        startActivity(intent);
+    }
+
+    public void openCookingActivity(){
+        Intent intent = new Intent(this, Cooking.class);
+        startActivity(intent);
+    }
+
+    public void openRecipeActivity(){
+        Intent intent = new Intent(this, CookingView.class);
         startActivity(intent);
     }
 

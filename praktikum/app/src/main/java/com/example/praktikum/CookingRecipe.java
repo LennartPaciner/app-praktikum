@@ -16,7 +16,7 @@ public class CookingRecipe extends AppCompatActivity {
 
     private TextView textView;
     private ImageView imageView;
-    private Button button;
+    private TextView textView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,25 +26,21 @@ public class CookingRecipe extends AppCompatActivity {
 
         textView = findViewById(R.id.textRezept);
         imageView = findViewById(R.id.imageRezept);
-        button = findViewById(R.id.imageButton);
+        textView2 = findViewById(R.id.imageText);
 
         Intent intent = getIntent();
         String descr = intent.getStringExtra(CookingView.EXTRA_DESC);
         String image = intent.getStringExtra(CookingView.EXTRA_IMAGE);
+        String meal = intent.getStringExtra(CookingView.EXTRA_MEAL);
 
+        //Zeige Anleitung für das Gericht aus der API an
         loadImage(image);
         textView.setText(descr);
+        textView2.setText(meal);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Müssen noch UI speichern ansonsten löscht er alles. Oder wir lassen den button weg und gehen übers handy zurück, das funktioniert.
-                //goBack();
-
-            }
-        });
     }
 
+    //Lade Bild aus der API und zeige es in einer ImageView an.
     public void loadImage(String url){
         Picasso.with(this).load(url).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(imageView, new com.squareup.picasso.Callback() {
             @Override
@@ -59,9 +55,4 @@ public class CookingRecipe extends AppCompatActivity {
         });
     }
 
-    //public void goBack(){
-
-      //  Intent intent = new Intent(this, CookingView.class);
-        //startActivity(intent);
-    //}
 }

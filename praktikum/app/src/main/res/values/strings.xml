@@ -17,8 +17,13 @@
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
     <string name="insert_food">Essen eingeben:</string>
-    <string name="amount_in_gram">Menge in Gramm</string>
+    <string name="amount_in_gram">Menge</string>
     <string name="instructions"><u>Anleitung</u></string>
     <string name="back">Zurück</string>
     <string name="category"><u>Kategorie</u></string>
+    <string name="name_title"><u>Name</u></string>
+    <string name="id_title"><u>ID</u></string>
+    <string name="title_activity_barcode">Barcode</string>
+    <string name="cook"><u>Kochen</u></string>
+    <string name="check_title"><u>Check</u></string>
 </resources>

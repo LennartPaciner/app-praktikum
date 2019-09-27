@@ -17,8 +17,13 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="insert_food">Insert food:</string>
-    <string name="amount_in_gram">Amount in gram</string>
+    <string name="amount_in_gram">Amount</string>
     <string name="instructions"><u>Instructions</u></string>
     <string name="back">Back</string>
     <string name="category"><u>Category</u></string>
+    <string name="name_title"><u>Name</u></string>
+    <string name="id_title"><u>ID</u></string>
+    <string name="cook"><u>Cooking</u></string>
+    <string name="title_activity_barcode">Barcode</string>
+    <string name="check_title"><u>Check</u></string>
 </resources>
