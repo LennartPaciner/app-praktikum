@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WhatsThere</string>
+    <string name="product_name"><u>Produkt</u></string>
+    <string name="amount"><u>Menge</u></string>
+    <string name="best_before_date"><u>Entfernen</u></string>
+    <string name="restock"><u>Auffüllen</u></string>
+    <string name="insert_product_name">Produktnamen eingeben:</string>
+    <string name="my_grocery_list">Meine Einkaufsliste</string>
+    <string name="my_stock">Mein Vorrat</string>
+    <string name="information_text">Wir hoffen Sie sind zufrieden mit:</string>
+    <string name="developer_team">Ihr Entwickler-Team:</string>
+    <string name="press_back_again">Zum Beenden erneut drücken</string>
+    <string name="cooking">Kochen</string>
+    <string name="recipes">Rezepte</string>
+    <string name="product_and_amount">Produktname und Menge:</string>
+    <string name="save">Speichern</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="insert_food">Essen eingeben:</string>
+    <string name="amount_in_gram">Menge</string>
+    <string name="instructions"><u>Anleitung</u></string>
+    <string name="back">Zurück</string>
+    <string name="category"><u>Kategorie</u></string>
+    <string name="name_title"><u>Name</u></string>
+    <string name="id_title"><u>ID</u></string>
+    <string name="title_activity_barcode">Barcode</string>
+    <string name="cook"><u>Kochen</u></string>
+    <string name="check_title"><u>Check</u></string>
+</resources>
