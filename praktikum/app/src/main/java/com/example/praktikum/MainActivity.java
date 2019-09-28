@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ToggleButton languageButton;
     public String appLanguage;
     private Button infoButton;
+    private Button testB;
 
 
     @Override
