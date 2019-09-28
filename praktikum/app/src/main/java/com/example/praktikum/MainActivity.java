@@ -20,6 +20,7 @@ import android.widget.ToggleButton;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView testT;
     private long backPressedTime;
     private Toast backToast;
     private Button einkaufButton;
